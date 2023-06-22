@@ -8,7 +8,8 @@ public class Grafo
     private int[][] matrizAdj;
     private List<List<Integer>> listaAdj;
 
-    public Grafo(int numVertices, boolean Matriz) {
+    public Grafo(int numVertices, boolean Matriz)
+    {
         this.numVertices = numVertices;
         this.Matriz = Matriz;
 
@@ -22,15 +23,24 @@ public class Grafo
             }
         }
     }
-    public void adicionarAresta(int origem, int destino) {
+    public void adicionarAresta(int origem, int destino)
+    {
         if (Matriz) {
-            matrizAdj[origem][destino] = 1;
-            matrizAdj[destino][origem] = 1;
+            matrizAdj[origem - 1][destino- 1] = 1;
+            matrizAdj[destino - 1][origem - 1] = 1;
         } else {
-            listaAdj.get(origem).add(destino);
-            listaAdj.get(destino).add(origem);
+            if(origem == destino)
+            {
+                listaAdj.get(origem).add(destino);
+            }
+            else
+            {
+                listaAdj.get(origem).add(destino);
+                listaAdj.get(destino).add(origem);
+            }
         }
     }
+
     public void imprimirGrafo() {
         if (Matriz) {
             System.out.println();
@@ -41,7 +51,7 @@ public class Grafo
             }
             System.out.println();
             for (int i = 0; i < numVertices; i++) {
-                System.out.print("L"+i+"  ");
+                System.out.print("L"+(i+1)+"  ");
                 for (int j = 0; j < numVertices; j++) {
                     System.out.print(matrizAdj[i][j] + " ");
                 }
@@ -49,7 +59,7 @@ public class Grafo
             }
         } else {
             for (int i = 0; i < numVertices; i++) {
-                System.out.print("Vértice " + i + ": ");
+                System.out.print("Vértice "+(i+1)+": ");
                 for (int j : listaAdj.get(i)) {
                     System.out.print(j + " ");
                 }

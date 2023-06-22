@@ -19,7 +19,7 @@ public class Matriz {
             }
         }
     }
-    //Cria uma matriz e pede
+
     public Matriz()
     {
         Scanner teclado = new Scanner(System.in);
