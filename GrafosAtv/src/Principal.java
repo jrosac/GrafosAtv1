@@ -1,6 +1,7 @@
 public class Principal {
-    public static void main(String[] args) {
-
+    public static void main(String[] args)
+    {
+        /*
         //Matriz m01 = new Matriz();
 
         //System.out.print(m01.toString());
@@ -34,6 +35,6 @@ public class Principal {
 
         // Tells whether vertex is present or not
         g.hasVertex(5);
-
+        */
     }
 }

@@ -1,99 +1,61 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-class Grafo<Vertice> {
+public class Grafo
+{
+    private int numVertices;
+    private boolean Matriz;
+    private int[][] matrizAdj;
+    private List<List<Integer>> listaAdj;
 
-    // We use Hashmap to store the edges in the grafo
-    private Map<Vertice, List<Vertice> > grafo = new HashMap<>();
+    public Grafo(int numVertices, boolean Matriz) {
+        this.numVertices = numVertices;
+        this.Matriz = Matriz;
 
-    // This function adds a new vertex to the graph
-    public void addVertice(Vertice s)
-    {
-        grafo.put(s, new LinkedList<Vertice>());
-    }
-
-    // This function adds the edge
-    // between source to destination
-    public void addAresta(Vertice source, Vertice destination, boolean bidirectional)
-    {
-
-        if (!grafo.containsKey(source))
-            addVertice(source);
-
-        if (!grafo.containsKey(destination))
-            addVertice(destination);
-
-        grafo.get(source).add(destination);
-        if (bidirectional == true) {
-            grafo.get(destination).add(source);
-        }
-    }
-
-    // This function gives the count of vertices
-    public void getVertexCount()
-    {
-        System.out.println("The graph has "
-                + grafo.keySet().size()
-                + " vertex");
-    }
-
-    // This function gives the count of edges
-    public void getEdgesCount(boolean bidirection)
-    {
-        int count = 0;
-        for (Vertice v : grafo.keySet()) {
-            count += grafo.get(v).size();
-        }
-        if (bidirection == true) {
-            count = count / 2;
-        }
-        System.out.println("The graph has "
-                + count
-                + " edges.");
-    }
-
-    // This function gives whether
-    // a vertex is present or not.
-    public void hasVertex(Vertice s)
-    {
-        if (grafo.containsKey(s)) {
-            System.out.println("The graph contains "
-                    + s + " as a vertex.");
-        }
-        else {
-            System.out.println("The graph does not contain "
-                    + s + " as a vertex.");
-        }
-    }
-
-    // This function gives whether an edge is present or not.
-    public void hasEdge(Vertice s, Vertice d)
-    {
-        if (grafo.get(s).contains(d)) {
-            System.out.println("The graph has an edge between "
-                    + s + " and " + d + ".");
-        }
-        else {
-            System.out.println("The graph has no edge between "
-                    + s + " and " + d + ".");
-        }
-    }
-
-    // Prints the adjancency list of each vertex.
-    @Override
-    public String toString()
-    {
-        StringBuilder builder = new StringBuilder();
-
-        for (Vertice v : grafo.keySet()) {
-            builder.append(v.toString() + ": ");
-            for (Vertice w : grafo.get(v)) {
-                builder.append(w.toString() + " ");
+        if (Matriz) {
+            matrizAdj = new int[numVertices][numVertices];
+        } else {
+            listaAdj = new ArrayList<>();
+            for (int i = 0; i < numVertices; i++)
+            {
+                listaAdj.add(new ArrayList<>());
             }
-            builder.append("\n");
         }
-
-        return (builder.toString());
     }
+    public void adicionarAresta(int origem, int destino) {
+        if (Matriz) {
+            matrizAdj[origem][destino] = 1;
+            matrizAdj[destino][origem] = 1;
+        } else {
+            listaAdj.get(origem).add(destino);
+            listaAdj.get(destino).add(origem);
+        }
+    }
+    public void imprimirGrafo() {
+        if (Matriz) {
+            System.out.println();
+            for (int a = 0; a < numVertices; a++)
+            {
+                if(a == 0){System.out.print("Col ");}
+                System.out.print(a+" ");
+            }
+            System.out.println();
+            for (int i = 0; i < numVertices; i++) {
+                System.out.print("L"+i+"  ");
+                for (int j = 0; j < numVertices; j++) {
+                    System.out.print(matrizAdj[i][j] + " ");
+                }
+                System.out.println();
+            }
+        } else {
+            for (int i = 0; i < numVertices; i++) {
+                System.out.print("Vértice " + i + ": ");
+                for (int j : listaAdj.get(i)) {
+                    System.out.print(j + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+
 }
-
-
