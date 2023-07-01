@@ -31,20 +31,27 @@ public class Grafo2 {
         vertices.add(vertice);
     }
 
-    public void adicionarAresta(int origem, int destino) {
+    public void adicionarAresta(int origem, int destino)
+    {
         if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices)
         {
             System.out.println("Índice de vértice inválido.");
         }
 
         if (matriz) {
-            matrizAdj[origem][destino] = 1;
-            matrizAdj[destino][origem] = 1;
+            if(origem == destino)
+            {
+                listaAdj.get(origem).add(destino);
+            }
+            else
+            {
+                matrizAdj[origem][destino] = 1;
+                matrizAdj[destino][origem] = 1;
+            }
         } else {
             listaAdj.get(origem).add(destino);
             listaAdj.get(destino).add(origem);
         }
-
         numArestas++;
     }
 
@@ -69,8 +76,8 @@ public class Grafo2 {
         if (indiceVertice < 0 || indiceVertice >= numVertices)
         {
             System.out.println("Índice de vértice inválido.");
+            return 0;
         }
-
         int grau = 0;
 
         if (matriz) {
@@ -86,9 +93,9 @@ public class Grafo2 {
 
     public boolean saoVizinhos(int indiceVertice1, int indiceVertice2) {
         if (indiceVertice1 < 0 || indiceVertice1 >= numVertices || indiceVertice2 < 0 || indiceVertice2 >= numVertices) {
-            throw new IllegalArgumentException("Índices de vértices inválidos.");
+            System.out.println("Índice de vértice inválido.");
+            return false;
         }
-
         if (matriz) {
             return matrizAdj[indiceVertice1][indiceVertice2] == 1;
         } else {

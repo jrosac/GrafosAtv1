@@ -5,7 +5,7 @@ public class Matriz {
     private int numerodelinhas;
     private int numerodecolunas;
 
-    public Matriz(int nlinhas, int ncolunas) // cria uma matriz com todos os valores 0
+    public Matriz(int nlinhas, int ncolunas) // cria uma matriz com todos os valores 1
     {
         numerodelinhas = nlinhas;
         numerodecolunas = ncolunas;
@@ -15,7 +15,7 @@ public class Matriz {
         {
             for(int j = 0; j < numerodecolunas ;j++)
             {
-                mat[i][j] = 0;
+                mat[i][j] = 1;
             }
         }
     }
