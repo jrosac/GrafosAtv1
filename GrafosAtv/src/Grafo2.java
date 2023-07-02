@@ -86,7 +86,8 @@ public class Grafo2 {
         numArestas--;
     }
 
-    public int calcularGrau(int indiceVertice) {
+    public int calcularGrau(int indiceVertice)
+    {
         if (indiceVertice < 0 || indiceVertice >= numVertices) {
             throw new IllegalArgumentException("Índice de vértice inválido.");
         }
@@ -120,7 +121,7 @@ public class Grafo2 {
     public void imprimirGrafo2()
     {
         System.out.println("Número de vértices: " + numVertices);
-        System.out.println("Número de arestas: " + numArestas);
+        System.out.println("Número de arestas: " + numArestas+"\n");
 
         if (matriz) {
             System.out.println("Estrutura de dados: \nMatriz de Adjacência");
@@ -146,8 +147,10 @@ public class Grafo2 {
                     }
                 }
             }
+            System.out.println();
+
         } else {
-            System.out.println("Estrutura de dados: \nLista de Adjacência");
+            System.out.println("Estrutura de dados: \nLista de Adjacência\n");
             System.out.println("Arestas:");
 
             for (int x = 0; x < numVertices; x++)
@@ -168,10 +171,36 @@ public class Grafo2 {
             }
         }
 
-        System.out.println("Grau dos vértices:");
-        for (int i = 0; i < numVertices; i++) {
+        System.out.println("\nGrau dos vértices:");
+        for (int i = 0; i < numVertices; i++)
+        {
             System.out.println(vertices.get(i).getRotulo() + ": " + calcularGrau(i));
         }
-        System.out.println("\n");
+        int somador = 0;
+
+        for(int i = 0; i < numVertices; i++)
+        {
+            somador += calcularGrau(i);
+        }
+        System.out.println("\nSomatório do Grau dos Vértices: ");
+        System.out.println(somador);
+
+
     }
+    public void gerarGrafoCompleto(int n) {
+        if (n <= 0) {
+            throw new IllegalArgumentException("O valor de n deve ser maior que 0.");
+        }
+
+        for (int i = 0; i < n; i++) {
+            adicionarVertice(i, "v"+String.valueOf(i+1));
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                adicionarAresta(i, j);
+            }
+        }
+    }
+
 }
