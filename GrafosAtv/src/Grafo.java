@@ -1,148 +1,236 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class Grafo {
+public class Grafo {
+    private int numVertices;
     private boolean matriz;
+    private int[][] matrizAdj;
+    private List<List<Integer>> listaAdj;
     private List<Vertice> vertices;
-    private int[][] matrizAdjacencia;
-    private List<List<Integer>> listaAdjacencia;
+    private int numArestas;
 
-    public Grafo(boolean matriz)
-    {
+    public Grafo(int numVertices, boolean matriz) {
+        this.numVertices = numVertices;
         this.matriz = matriz;
+        this.numArestas = 0;
+
+        if (matriz) {
+            matrizAdj = new int[numVertices][numVertices];
+        } else {
+            listaAdj = new ArrayList<>();
+            for (int i = 0; i < numVertices; i++) {
+                listaAdj.add(new ArrayList<>());
+            }
+        }
+
         vertices = new ArrayList<>();
-        if (matriz)
-        {
-            matrizAdjacencia = new int[0][0];
-        }
-        else
-        {
-            listaAdjacencia = new ArrayList<>();
-        }
     }
 
-    public void adicionarVertice(int indice, String rotulo)
-    {
+    public void adicionarVertice(int indice, String rotulo) {
         Vertice vertice = new Vertice(indice, rotulo);
         vertices.add(vertice);
-
-        if (matriz)
-        {
-            atualizarMatrizAdjacencia();
-        }
-        else
-        {
-            atualizarListaAdjacencia();
-        }
     }
 
-    private void atualizarMatrizAdjacencia()
-    {
-        int[][] novaMatriz = new int[vertices.size()][vertices.size()];
-        for (int i = 0; i < matrizAdjacencia.length; i++)
-        {
-            System.arraycopy(matrizAdjacencia[i], 0, novaMatriz[i], 0, matrizAdjacencia[i].length);
+    public void adicionarAresta(int origem, int destino) {
+        if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices) {
+            throw new IllegalArgumentException("Índices de vértices inválidos.");
         }
-        matrizAdjacencia = novaMatriz;
-    }
-
-    private void atualizarListaAdjacencia() {
-        listaAdjacencia.add(new ArrayList<>());
-    }
-
-    public void adicionarAresta(int indiceVertice1, int indiceVertice2) {
-        if (matriz)
-        {
-            matrizAdjacencia[indiceVertice1][indiceVertice2] = 1;
-            matrizAdjacencia[indiceVertice2][indiceVertice1] = 1;
-        } else
-        {
-            listaAdjacencia.get(indiceVertice1).add(indiceVertice2);
-            listaAdjacencia.get(indiceVertice2).add(indiceVertice1);
-        }
-    }
-
-    public void removerAresta(int indiceVertice1, int indiceVertice2) {
         if (matriz) {
-            matrizAdjacencia[indiceVertice1][indiceVertice2] = 0;
-            matrizAdjacencia[indiceVertice2][indiceVertice1] = 0;
+            if (origem == destino) {
+                matrizAdj[origem][destino] = 2;
+            } else {
+                matrizAdj[origem][destino] = 1;
+                matrizAdj[destino][origem] = 1;
+            }
         } else {
-            listaAdjacencia.get(indiceVertice1).remove(Integer.valueOf(indiceVertice2));
-            listaAdjacencia.get(indiceVertice2).remove(Integer.valueOf(indiceVertice1));
+            if (origem == destino) {
+                listaAdj.get(origem).add(destino);
+            } else {
+                listaAdj.get(origem).add(destino);
+                listaAdj.get(destino).add(origem);
+            }
         }
+        vertices.get(origem).incrementarGrau();
+        vertices.get(destino).incrementarGrau();
+        numArestas++;
+    }
+
+    public void removerAresta(int origem, int destino) {
+        if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices) {
+            throw new IllegalArgumentException("Índices de vértices inválidos.");
+        }
+
+        if (matriz) {
+            matrizAdj[origem][destino] = 0;
+            matrizAdj[destino][origem] = 0;
+        } else {
+            listaAdj.get(origem).remove(Integer.valueOf(destino));
+            listaAdj.get(destino).remove(Integer.valueOf(origem));
+        }
+        vertices.get(origem).decrementarGrau();
+        vertices.get(destino).decrementarGrau();
+
+        numArestas--;
     }
 
     public int calcularGrau(int indiceVertice) {
+        if (indiceVertice < 0 || indiceVertice >= numVertices) {
+            throw new IllegalArgumentException("Índice de vértice inválido.");
+        }
+        int grau = 0;
         if (matriz) {
-            int grau = 0;
-            for (int i = 0; i < matrizAdjacencia[indiceVertice].length; i++) {
-                if (matrizAdjacencia[indiceVertice][i] == 1) {
-                    grau++;
-                }
+            for (int i = 0; i < numVertices; i++) {
+                grau += matrizAdj[indiceVertice][i];
             }
             return grau;
         } else {
-            return listaAdjacencia.get(indiceVertice).size();
+            return vertices.get(indiceVertice).getGrau();
         }
     }
 
     public boolean saoVizinhos(int indiceVertice1, int indiceVertice2) {
+        if (indiceVertice1 < 0 || indiceVertice1 >= numVertices || indiceVertice2 < 0 || indiceVertice2 >= numVertices) {
+            throw new IllegalArgumentException("Índices de vértices inválidos.");
+        }
+
         if (matriz) {
-            return matrizAdjacencia[indiceVertice1][indiceVertice2] == 1;
+            return matrizAdj[indiceVertice1][indiceVertice2] == 1;
         } else {
-            return listaAdjacencia.get(indiceVertice1).contains(indiceVertice2);
+            return listaAdj.get(indiceVertice1).contains(indiceVertice2);
         }
     }
 
-    public void imprimirGrafo()
-    {
-        System.out.println("Número de vértices: " + vertices.size());
-        System.out.println("Número de arestas: " + contarArestas());
-        System.out.println("Arestas:");
+    public void imprimirGrafo2() {
+        System.out.println("Número de vértices: " + numVertices);
+        System.out.println("Número de arestas: " + numArestas + "\n");
 
         if (matriz) {
-            for (int i = 0; i < matrizAdjacencia.length; i++) {
-                for (int j = i + 1; j < matrizAdjacencia[i].length; j++) {
-                    if (matrizAdjacencia[i][j] == 1) {
+            System.out.println("Estrutura de dados: \nMatriz de Adjacência");
+
+            for (int a = 0; a < numVertices; a++) {
+                if (a == 0) {
+                    System.out.print("Col ");
+                }
+                System.out.print(a + " ");
+            }
+            System.out.println();
+            for (int i = 0; i < numVertices; i++) {
+                System.out.print("L" + i + "  ");
+                for (int j = 0; j < numVertices; j++) {
+                    System.out.print(matrizAdj[i][j] + " ");
+                }
+                System.out.println();
+            }
+            System.out.println("Arestas:");
+            for (int i = 0; i < numVertices; i++) {
+                for (int j = i + 1; j < numVertices; j++) {
+                    if (matrizAdj[i][j] == 1) {
                         System.out.println(vertices.get(i).getRotulo() + " - " + vertices.get(j).getRotulo());
                     }
                 }
             }
+            System.out.println();
         } else {
-            for (int i = 0; i < listaAdjacencia.size(); i++) {
-                for (int j : listaAdjacencia.get(i)) {
-                    if (i < j) {
+            System.out.println("Estrutura de dados: \nLista de Adjacência\n");
+            System.out.println("Arestas:");
+
+            for (int x = 0; x < numVertices; x++) {
+                System.out.print("Vértice " + x + ": ");
+                for (int j : listaAdj.get(x)) {
+                    System.out.print(j + " ");
+                }
+                System.out.println();
+            }
+            for (int i = 0; i < numVertices; i++) {
+                for (int j : listaAdj.get(i)) {
+                    if (j >= i) {
                         System.out.println(vertices.get(i).getRotulo() + " - " + vertices.get(j).getRotulo());
                     }
                 }
             }
         }
 
-        System.out.println("Graus dos vértices:");
-        for (int i = 0; i < vertices.size(); i++) {
+        System.out.println("\nGrau dos vértices:");
+        for (int i = 0; i < numVertices; i++) {
             System.out.println(vertices.get(i).getRotulo() + ": " + calcularGrau(i));
         }
+        int somador = 0;
+
+        for (int i = 0; i < numVertices; i++) {
+            somador += calcularGrau(i);
+        }
+        System.out.println("\nSomatório do Grau dos Vértices: " + somador);
+
+        int grauimpar = 0;
+        int graupar = 0;
+        for (int i = 0; i < numVertices; i++) {
+            if ((calcularGrau(i)) % 2 != 0) {
+                grauimpar++;
+            }
+            if ((calcularGrau(i)) % 2 == 0) {
+                graupar++;
+            }
+        }
+        System.out.println("\nGrau ímpar: " + grauimpar);
+        System.out.println("\nGrau par: " + graupar);
     }
 
-    private int contarArestas() {
-        int contador = 0;
-        if (matriz) {
-            for (int i = 0; i < matrizAdjacencia.length; i++) {
-                for (int j = i + 1; j < matrizAdjacencia[i].length; j++) {
-                    if (matrizAdjacencia[i][j] == 1) {
+    public static void gerarGrafoRegular(int numVertices, int grau) {
+        if (numVertices <= 0 || grau <= 0 || grau >= numVertices) {
+            throw new IllegalArgumentException("Número de vértices ou grau inválido.");
+        }
+        if (numVertices * grau % 2 != 0) {
+            throw new IllegalArgumentException("Combinação inválida de vértices e grau.");
+        }
+
+        Grafo2 grafo = new Grafo2(numVertices, false);
+
+        for (int i = 0; i < numVertices; i++)
+        {
+            grafo.adicionarVertice(i, "V" + i);
+        }
+
+        List<Integer> sequencia = new ArrayList<>();
+
+        for (int i = 0; i < numVertices; i++)
+        {
+            for (int j = 0; j < grau; j++) {
+                sequencia.add(i);
+            }
+        }
+
+        boolean gerado = false;
+        while (!gerado) {
+            java.util.Collections.shuffle(sequencia);
+
+            boolean valido = true;
+            for (int i = 0; i < numVertices; i++) {
+                int contador = 0;
+                for (int j = 0; j < grau; j++) {
+                    if (grafo.calcularGrau(i) < grau && grafo.calcularGrau(sequencia.get(contador)) < grau
+                            && i != sequencia.get(contador) && !grafo.saoVizinhos(i, sequencia.get(contador))) {
+                        grafo.adicionarAresta(i, sequencia.get(contador));
                         contador++;
+                    } else {
+                        valido = false;
+                        break;
                     }
                 }
+                if (!valido) {
+                    break;
+                }
             }
-        } else {
-            for (int i = 0; i < listaAdjacencia.size(); i++) {
-                for (int j : listaAdjacencia.get(i)) {
-                    if (i < j) {
-                        contador++;
-                    }
+            if (valido) {
+                gerado = true;
+            } else {
+                grafo = new Grafo2(numVertices, false);
+                for (int i = 0; i < numVertices; i++) {
+                    grafo.adicionarVertice(i, "V" + i);
                 }
             }
         }
-        return contador;
+
+        grafo.imprimirGrafo2();
     }
+
 }
