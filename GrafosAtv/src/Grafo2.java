@@ -182,10 +182,23 @@ public class Grafo2 {
         {
             somador += calcularGrau(i);
         }
-        System.out.println("\nSomatório do Grau dos Vértices: ");
-        System.out.println(somador);
+        System.out.println("\nSomatório do Grau dos Vértices: "+somador);
 
-
+        int grauimpar = 0;
+        int graupar = 0;
+        for (int i = 0; i < numVertices; i++)
+        {
+            if((calcularGrau(i))%2 != 0)
+            {
+                grauimpar++;
+            }
+            if((calcularGrau(i))%2 == 0)
+            {
+                graupar++;
+            }
+        }
+        System.out.println("Vértices de grau ímpar: "+grauimpar);
+        System.out.println("Vértices de grau par:   "+graupar);
     }
     public void gerarGrafoCompleto(int n) {
         if (n <= 0) {
@@ -200,6 +213,62 @@ public class Grafo2 {
             for (int j = i + 1; j < n; j++) {
                 adicionarAresta(i, j);
             }
+        }
+    }
+    public void gerarGrafoRegular(int n, int k)
+    {
+        if (n <= 0 || k <= 0)
+        {
+            throw new IllegalArgumentException("Os valores de n e k devem ser maiores que 0.");
+        }
+
+        if (n < k || (n * k) % 2 != 0)
+        {
+            throw new IllegalArgumentException("Não é possível gerar um grafo k-regular de ordem n com os valores fornecidos.");
+        }
+
+        // Limpa o grafo atual, se houver algum
+        numVertices = 0;
+        numArestas = 0;
+        vertices.clear();
+
+        // Adiciona os vértices ao grafo
+        for (int i = 0; i < n; i++)
+        {
+            adicionarVertice(i, "v" + (i + 1));
+        }
+
+        // Cria uma lista auxiliar para armazenar os vértices disponíveis para conexão
+        List<Integer> disponiveis = new ArrayList<>();
+        for (int i = 0; i < n; i++)
+        {
+            disponiveis.add(i);
+        }
+
+        // Conecta os vértices para formar um grafo k-regular
+        for (int i = 0; i < n; i++)
+        {
+            int grauAtual = calcularGrau(i);
+            int verticesRestantes = k - grauAtual;
+
+            while (verticesRestantes > 0)
+            {
+                // Escolhe aleatoriamente um vértice disponível para conexão
+                int index = (int) (Math.random() * disponiveis.size());
+                int j = disponiveis.get(index);
+
+                // Verifica se a conexão não forma uma aresta já existente
+                if (i != j && !saoVizinhos(i, j)) {
+                    adicionarAresta(i, j);
+                    verticesRestantes--;
+                }
+
+                // Remove o vértice conectado da lista de disponíveis
+                disponiveis.remove(index);
+            }
+
+            // Adiciona novamente os vértices disponíveis para a próxima iteração
+            disponiveis.add(disponiveisRestantes.get(i));
         }
     }
 

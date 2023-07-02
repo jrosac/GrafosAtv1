@@ -1,7 +1,7 @@
 public class Principal {
     public static void main(String[] args)
     {
-        /*
+
         Grafo2 grafo1 = new Grafo2(5, false);
 
         grafo1.adicionarVertice(0,"v1");
@@ -25,7 +25,7 @@ public class Principal {
 
         grafo1.imprimirGrafo2();
 
-
+/*
         Grafo2 grafo2 = new Grafo2(5, false);
 
         grafo2.adicionarVertice(0,"v1");
@@ -54,10 +54,11 @@ public class Principal {
 
         grafo2.adicionarAresta(4,4);//loop
 
-        grafo2.imprimirGrafo2();*/
+        grafo2.imprimirGrafo2();
 
         Grafo2 grafo3 = new Grafo2(5, false);
         grafo3.gerarGrafoCompleto(5);
         grafo3.imprimirGrafo2();
+        */
     }
 }
