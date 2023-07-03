@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Grafo2 {
     private int numVertices;
@@ -215,7 +216,8 @@ public class Grafo2 {
             }
         }
     }
-    public void gerarGrafoRegular(int n, int k) {
+    public void gerarGrafoRegular(int n, int k)
+    {
         if (n <= 0 || k <= 0 || k >= n || (n * k) % 2 != 0)
         {
             throw new IllegalArgumentException("Os valores de n e k devem ser positivos, k deve ser menor que n, e o produto n*k deve ser par.");
@@ -226,7 +228,6 @@ public class Grafo2 {
             adicionarVertice(i, "v"+String.valueOf(i + 1));
         }
 
-        int[] graus = new int[n];
         List<Integer> verticesDisponiveis = new ArrayList<>();
 
         for (int i = 0; i < n; i++)
@@ -253,5 +254,41 @@ public class Grafo2 {
             verticesDisponiveis.remove(0);
         }
     }
+        public boolean isBipartido(Grafo2 grafo, Set<Integer> X, Set<Integer> Y)
+        {
+            // Verifica se o grafo é vazio
+            if (grafo == null || grafo.numVertices == 0)
+            {
+                return true;
+            }
+
+            // Verifica se os conjuntos X e Y são vazios
+            if (X.isEmpty() && Y.isEmpty()) {
+                return false;
+            }
+
+            // Verifica se todos os vértices pertencem a X ou Y
+            for (int i = 0; i < grafo.numVertices; i++) {
+                if (!X.contains(i) && !Y.contains(i)) {
+                    return false;
+                }
+            }
+
+            // Verifica se não há arestas entre vértices de X ou entre vértices de Y
+            for (int i = 0; i < grafo.numVertices; i++)
+            {
+                for (int j = i + 1; j < grafo.numVertices; j++)
+                {
+                    if ((X.contains(i) && X.contains(j)) || (Y.contains(i) && Y.contains(j)))
+                    {
+                        if (grafo.saoVizinhos(i, j)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
 
 }
