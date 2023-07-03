@@ -15,11 +15,14 @@ public class Grafo2 {
         this.matriz = matriz;
         this.numArestas = 0;
 
-        if (matriz) {
+        if (matriz)
+        {
             matrizAdj = new int[numVertices][numVertices];
-        } else {
+        } else
+        {
             listaAdj = new ArrayList<>();
-            for (int i = 0; i < numVertices; i++) {
+            for (int i = 0; i < numVertices; i++)
+            {
                 listaAdj.add(new ArrayList<>());
             }
         }
@@ -133,9 +136,11 @@ public class Grafo2 {
                 System.out.print(a+" ");
             }
             System.out.println();
-            for (int i = 0; i < numVertices; i++) {
+            for (int i = 0; i < numVertices; i++)
+            {
                 System.out.print("L"+i+"  ");
-                for (int j = 0; j < numVertices; j++) {
+                for (int j = 0; j < numVertices; j++)
+                {
                     System.out.print(matrizAdj[i][j] + " ");
                 }
                 System.out.println();
@@ -163,9 +168,12 @@ public class Grafo2 {
                 }
                 System.out.println();
             }
-            for (int i = 0; i < numVertices; i++) {
-                for (int j : listaAdj.get(i)) {
-                    if (j >= i) {
+            for (int i = 0; i < numVertices; i++)
+            {
+                for (int j : listaAdj.get(i))
+                {
+                    if (j >= i)
+                    {
                         System.out.println(vertices.get(i).getRotulo() + " - " + vertices.get(j).getRotulo());
                     }
                 }
@@ -242,6 +250,7 @@ public class Grafo2 {
 
             while (grauAtual < k)
             {
+
                 int verticeAleatorio = verticesDisponiveis.get((int) (Math.random() * verticesDisponiveis.size()));
 
                 if (vertice != verticeAleatorio && calcularGrau(verticeAleatorio) < k)

@@ -58,12 +58,12 @@ public class Principal {
         Grafo2 grafo3 = new Grafo2(5, false);
         grafo3.gerarGrafoCompleto(5);
         grafo3.imprimirGrafo2();
-
+*/
         // Exemplo de 2.2
-        Grafo2 grafo4 = new Grafo2(27, false);
-        grafo4.gerarGrafoRegular(27,2);
+        Grafo2 grafo4 = new Grafo2(4, false);
+        grafo4.gerarGrafoRegular(4,2);
         grafo4.imprimirGrafo2();
-        */
+
 
         /*
         // Exemplo de 2.3
@@ -95,9 +95,5 @@ public class Principal {
             System.out.println("É Bipartido!");
         }
 */
-
-
-
-
     }
 }
