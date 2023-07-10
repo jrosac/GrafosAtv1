@@ -4,7 +4,7 @@ public class Principal {
     public static void main(String[] args)
     {
         /*
-        // Grafo 1 Exercicio 1.8
+        System.out.println("\nGrafo 1 Exercicio 1.8");
         Grafo2 grafo1 = new Grafo2(5, false);
 
         grafo1.adicionarVertice(0,"v1");
@@ -28,7 +28,7 @@ public class Principal {
 
         grafo1.imprimirGrafo2();
 
-        // Grafo 2 Exercicio 1.8
+        System.out.println("\nGrafo 2 Exercicio 1.8");
         Grafo2 grafo2 = new Grafo2(5, false);
 
         grafo2.adicionarVertice(0,"v1");
@@ -52,21 +52,20 @@ public class Principal {
         grafo2.adicionarAresta(3,4);
 
 
-        grafo2.imprimirGrafo2();
+        grafo2.imprimirGrafo2();*/
 
-        // Exemplo de 2.1
+        System.out.println("\nExemplo de 2.1");
         Grafo2 grafo3 = new Grafo2(5, false);
         grafo3.gerarGrafoCompleto(5);
         grafo3.imprimirGrafo2();
-*/
-        // Exemplo de 2.2
-        Grafo2 grafo4 = new Grafo2(4, false);
-        grafo4.gerarGrafoRegular(4,2);
+
+        System.out.println("\nExemplo de 2.2");
+        Grafo2 grafo4 = new Grafo2(6, false);
+        grafo4.gerarGrafoRegular(6,2);
         grafo4.imprimirGrafo2();
 
 
-        /*
-        // Exemplo de 2.3
+        System.out.println("\nExemplo de 2.3");
         Grafo2 grafo5 = new Grafo2(5, false);
         grafo5.adicionarVertice(0, "v1");
         grafo5.adicionarVertice(1, "v2");
@@ -81,6 +80,8 @@ public class Principal {
         grafo5.adicionarAresta(2, 3);
         grafo5.adicionarAresta(2, 4);
 
+
+
         Set<Integer> X = new HashSet<>();
         Set<Integer> Y = new HashSet<>();
         X.add(0);
@@ -91,9 +92,10 @@ public class Principal {
 
         if(grafo5.isBipartido(grafo5,X,Y) == true)
         {
-            System.out.println(grafo5.isBipartido(grafo5,X,Y));
-            System.out.println("É Bipartido!");
+            System.out.println("E Bipartido!");
         }
-*/
+        grafo5.imprimirGrafo2();
+
+
     }
 }

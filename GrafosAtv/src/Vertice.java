@@ -15,6 +15,13 @@ public class Vertice
         this.grau = 0;
         this.flag = false;
     }
+    public Vertice(int indice)
+    {
+        this.indice = indice;
+        this.rotulo = "v"+String.valueOf(indice);
+        this.grau = 0;
+        this.flag = false;
+    }
 
     public void setFlag(boolean flag) {
         this.flag = flag;
