@@ -1,36 +1,122 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class Grafo {
+
+public class Grafo
+{
     private int numVertices;
+    private int numArestas;
     private boolean matriz;
     private int[][] matrizAdj;
-    private List<List<Integer>> listaAdj;
-    private List<Vertice> vertices;
-    private int numArestas;
+    private Map<Vertice1, List<Vertice1>> listaAdj;
+    private List<Vertice1> vertices;
 
-    public Grafo(int numVertices, boolean matriz) {
+    public int getNumArestas() {return numArestas;}
+    public int getNumVertices() {return numVertices;}
+    public boolean getMatriz(){return matriz;}
+
+    public Grafo(boolean matriz)
+    {
+        this.numVertices = 0;
+        this.matriz = matriz;
+        this.numArestas = 0;
+
+        if (matriz)
+        {
+            matrizAdj = new int[numVertices][numVertices];
+        }
+        else
+        {
+            listaAdj = new HashMap<>();
+            vertices = new ArrayList<>();
+            listaAdj.put(null,vertices);
+
+        }
+    }//Cria oGrafo Nulo
+
+    public Grafo(int numVertices, boolean matriz)
+    {
         this.numVertices = numVertices;
         this.matriz = matriz;
         this.numArestas = 0;
 
-        if (matriz) {
+        if (matriz)
+        {
             matrizAdj = new int[numVertices][numVertices];
-        } else {
-            listaAdj = new ArrayList<>();
-            for (int i = 0; i < numVertices; i++) {
-                listaAdj.add(new ArrayList<>());
+        }
+        else
+        {
+            listaAdj = new HashMap<>();
+            vertices = new ArrayList<>();
+            for (int i = 1; i <= numVertices; i++)
+            {
+                Vertice1 vertice = new Vertice1(i);
+                listaAdj.put(vertice, vertices);
             }
         }
-
-        vertices = new ArrayList<>();
     }
 
-    public void adicionarVertice(int indice, String rotulo) {
-        Vertice vertice = new Vertice(indice, rotulo);
+    public List<Vertice1> getVertice(int indice)
+    {
+        return listaAdj.get(indice);
+    }
+    public Set<Vertice1> getVertices()
+    {
+        return listaAdj.keySet();
+    }
+    public void adicionarVertice1(int indice)
+    {
+        Vertice1 vertice = new Vertice1(indice);
+        listaAdj.put(vertice, new ArrayList<>());
         vertices.add(vertice);
+        numVertices++;
+    }
+    public void removerVertice1(int indice)
+    {
+        Vertice1 vertice = vertices.get(indice - 1);
+        vertices.set(indice - 1, null);
+        listaAdj.remove(vertice);
+        for (List<Vertice1> vizinhos : listaAdj.values())
+        {
+            vizinhos.removeIf(v -> v != null && v.equals(vertice));
+        }
+        numVertices--;
+    }
+    public void adicionarAresta1(int origem, int destino)
+    {
+        // -1 pois indices comecam em 1
+        Vertice1 verticeOrigem  = vertices.get(origem - 1);
+        Vertice1 verticeDestino = vertices.get(destino - 1);
+
+        listaAdj.get(verticeOrigem).add(verticeDestino);
+
+        numArestas++;
     }
 
+    public void removerAresta1(int origem, int destino)
+    {
+        // -1 pois indices comecam em 1
+        Vertice1 verticeOrigem  = vertices.get(origem - 1);
+        Vertice1 verticeDestino = vertices.get(destino - 1);
+
+        List<Vertice1> vizinhos = listaAdj.get(verticeOrigem);
+        vizinhos.remove(verticeDestino);
+
+        numArestas--;
+    }
+    public void imprimirGrafo()
+    {
+        for (Vertice1 vertice : vertices)
+        {
+            System.out.print(vertice.getRotulo1() + " -> ");
+            List<Vertice1> vizinhos = listaAdj.get(vertice);
+            for (Vertice1 vizinho : vizinhos) {
+                System.out.print(vizinho.getRotulo1() + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("\n");
+    }
+/*
     public void adicionarAresta(int origem, int destino) {
         if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices) {
             throw new IllegalArgumentException("Índices de vértices inválidos.");
@@ -231,6 +317,6 @@ public class Grafo {
         }
 
         grafo.imprimirGrafo2();
-    }
+    }*/
 
 }
