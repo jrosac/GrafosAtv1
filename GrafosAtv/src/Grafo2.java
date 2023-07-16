@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Grafo2 {
     private int numVertices;
@@ -14,11 +15,14 @@ public class Grafo2 {
         this.matriz = matriz;
         this.numArestas = 0;
 
-        if (matriz) {
+        if (matriz)
+        {
             matrizAdj = new int[numVertices][numVertices];
-        } else {
+        } else
+        {
             listaAdj = new ArrayList<>();
-            for (int i = 0; i < numVertices; i++) {
+            for (int i = 0; i < numVertices; i++)
+            {
                 listaAdj.add(new ArrayList<>());
             }
         }
@@ -34,7 +38,7 @@ public class Grafo2 {
     public void adicionarAresta(int origem, int destino) {
         if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices)
         {
-            throw new IllegalArgumentException("Índices de vértices inválidos.");
+            throw new IllegalArgumentException("indices de vertices inválidos.");
         }
         if (matriz)
         {
@@ -70,7 +74,7 @@ public class Grafo2 {
     public void removerAresta(int origem, int destino) {
         if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices)
         {
-            throw new IllegalArgumentException("Índices de vértices inválidos.");
+            throw new IllegalArgumentException("indices de vertices inválidos.");
         }
 
         if (matriz) {
@@ -89,7 +93,7 @@ public class Grafo2 {
     public int calcularGrau(int indiceVertice)
     {
         if (indiceVertice < 0 || indiceVertice >= numVertices) {
-            throw new IllegalArgumentException("Índice de vértice inválido.");
+            throw new IllegalArgumentException("indice de vertice inválido.");
         }
         int grau = 0;
         if (matriz) {
@@ -108,7 +112,7 @@ public class Grafo2 {
 
     public boolean saoVizinhos(int indiceVertice1, int indiceVertice2) {
         if (indiceVertice1 < 0 || indiceVertice1 >= numVertices || indiceVertice2 < 0 || indiceVertice2 >= numVertices) {
-            throw new IllegalArgumentException("Índices de vértices inválidos.");
+            throw new IllegalArgumentException("indices de vertices inválidos.");
         }
 
         if (matriz) {
@@ -120,11 +124,11 @@ public class Grafo2 {
 
     public void imprimirGrafo2()
     {
-        System.out.println("Número de vértices: " + numVertices);
-        System.out.println("Número de arestas: " + numArestas+"\n");
+        System.out.println("Numero de vertices: " + numVertices);
+        System.out.println("Numero de arestas: " + numArestas+"\n");
 
         if (matriz) {
-            System.out.println("Estrutura de dados: \nMatriz de Adjacência");
+            System.out.println("Estrutura de dados: \nMatriz de Adjacencia");
 
             for (int a = 0; a < numVertices; a++)
             {
@@ -132,9 +136,11 @@ public class Grafo2 {
                 System.out.print(a+" ");
             }
             System.out.println();
-            for (int i = 0; i < numVertices; i++) {
+            for (int i = 0; i < numVertices; i++)
+            {
                 System.out.print("L"+i+"  ");
-                for (int j = 0; j < numVertices; j++) {
+                for (int j = 0; j < numVertices; j++)
+                {
                     System.out.print(matrizAdj[i][j] + " ");
                 }
                 System.out.println();
@@ -150,28 +156,31 @@ public class Grafo2 {
             System.out.println();
 
         } else {
-            System.out.println("Estrutura de dados: \nLista de Adjacência\n");
+            System.out.println("Estrutura de dados: \nLista de Adjacencia\n");
             System.out.println("Arestas:");
 
             for (int x = 0; x < numVertices; x++)
             {
-                System.out.print("Vértice " + x + ": ");
+                System.out.print("Vertice " + x + ": ");
                 for (int j : listaAdj.get(x))
                 {
                     System.out.print(j + " ");
                 }
                 System.out.println();
             }
-            for (int i = 0; i < numVertices; i++) {
-                for (int j : listaAdj.get(i)) {
-                    if (j >= i) {
+            for (int i = 0; i < numVertices; i++)
+            {
+                for (int j : listaAdj.get(i))
+                {
+                    if (j >= i)
+                    {
                         System.out.println(vertices.get(i).getRotulo() + " - " + vertices.get(j).getRotulo());
                     }
                 }
             }
         }
 
-        System.out.println("\nGrau dos vértices:");
+        System.out.println("\nGrau dos vertices:");
         for (int i = 0; i < numVertices; i++)
         {
             System.out.println(vertices.get(i).getRotulo() + ": " + calcularGrau(i));
@@ -182,7 +191,7 @@ public class Grafo2 {
         {
             somador += calcularGrau(i);
         }
-        System.out.println("\nSomatório do Grau dos Vértices: "+somador);
+        System.out.println("\nSomatorio do Grau dos Vertices: "+somador);
 
         int grauimpar = 0;
         int graupar = 0;
@@ -197,8 +206,8 @@ public class Grafo2 {
                 graupar++;
             }
         }
-        System.out.println("Vértices de grau ímpar: "+grauimpar);
-        System.out.println("Vértices de grau par:   "+graupar);
+        System.out.println("Vertices de grau impar: "+grauimpar);
+        System.out.println("Vertices de grau par:   "+graupar);
     }
     public void gerarGrafoCompleto(int n) {
         if (n <= 0) {
@@ -215,7 +224,8 @@ public class Grafo2 {
             }
         }
     }
-    public void gerarGrafoRegular(int n, int k) {
+    public void gerarGrafoRegular(int n, int k)
+    {
         if (n <= 0 || k <= 0 || k >= n || (n * k) % 2 != 0)
         {
             throw new IllegalArgumentException("Os valores de n e k devem ser positivos, k deve ser menor que n, e o produto n*k deve ser par.");
@@ -226,7 +236,6 @@ public class Grafo2 {
             adicionarVertice(i, "v"+String.valueOf(i + 1));
         }
 
-        int[] graus = new int[n];
         List<Integer> verticesDisponiveis = new ArrayList<>();
 
         for (int i = 0; i < n; i++)
@@ -241,7 +250,8 @@ public class Grafo2 {
 
             while (grauAtual < k)
             {
-                int verticeAleatorio = verticesDisponiveis.get((int) (Math.random() * verticesDisponiveis.size()));
+
+                int verticeAleatorio = verticesDisponiveis.get(1);
 
                 if (vertice != verticeAleatorio && calcularGrau(verticeAleatorio) < k)
                 {
@@ -253,5 +263,41 @@ public class Grafo2 {
             verticesDisponiveis.remove(0);
         }
     }
+        public boolean isBipartido(Grafo2 grafo, Set<Integer> X, Set<Integer> Y)
+        {
+            // Verifica se o grafo e vazio
+            if (grafo == null || grafo.numVertices == 0)
+            {
+                return true;
+            }
+
+            // Verifica se os conjuntos X e Y são vazios
+            if (X.isEmpty() && Y.isEmpty()) {
+                return false;
+            }
+
+            // Verifica se todos os vertices pertencem a X ou Y
+            for (int i = 0; i < grafo.numVertices; i++) {
+                if (!X.contains(i) && !Y.contains(i)) {
+                    return false;
+                }
+            }
+
+            // Verifica se não há arestas entre vertices de X ou entre vertices de Y
+            for (int i = 0; i < grafo.numVertices; i++)
+            {
+                for (int j = i + 1; j < grafo.numVertices; j++)
+                {
+                    if ((X.contains(i) && X.contains(j)) || (Y.contains(i) && Y.contains(j)))
+                    {
+                        if (grafo.saoVizinhos(i, j)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
 
 }
