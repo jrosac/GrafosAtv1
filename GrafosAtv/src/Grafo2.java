@@ -301,7 +301,7 @@ public class Grafo2 {
             return true;
         }
 
-    public void buscaEmProfundidade(int verticeInicial) {
+    public boolean buscaEmProfundidade(int verticeInicial, int verticeBuscado) {
         boolean[] visitado = new boolean[numVertices];
         Stack<Integer> pilha = new Stack<>();
 
@@ -312,6 +312,10 @@ public class Grafo2 {
             int verticeAtual = pilha.pop();
             System.out.println(vertices.get(verticeAtual).getRotulo());
 
+            if (verticeAtual == verticeBuscado) {
+                return true;
+            }
+
             for (int vizinho : listaAdj.get(verticeAtual)) {
                 if (!visitado[vizinho]) {
                     visitado[vizinho] = true;
@@ -319,6 +323,8 @@ public class Grafo2 {
                 }
             }
         }
+
+        return false;
     }
 
 }

@@ -58,8 +58,14 @@ public class Principal {
         Grafo2 grafo3 = new Grafo2(5, false);
         grafo3.gerarGrafoCompleto(5);
         grafo3.imprimirGrafo2();
+        if(grafo3.buscaEmProfundidade(1,4)){
+            System.out.println("achei o vertice meu patrao");
+        }
+        else {
+            System.out.println("se lascou me nobre, achei foi nada");
+        }
 
-        System.out.println("\nExemplo de 2.2");
+        /*System.out.println("\nExemplo de 2.2");
         Grafo2 grafo4 = new Grafo2(6, false);
         grafo4.gerarGrafoRegular(6,2);
         grafo4.imprimirGrafo2();
@@ -95,7 +101,7 @@ public class Principal {
             System.out.println("E Bipartido!");
         }
         grafo5.imprimirGrafo2();
-
+    */
 
     }
 }
