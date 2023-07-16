@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 public class Grafo2 {
     private int numVertices;
@@ -299,5 +300,25 @@ public class Grafo2 {
 
             return true;
         }
+
+    public void buscaEmProfundidade(int verticeInicial) {
+        boolean[] visitado = new boolean[numVertices];
+        Stack<Integer> pilha = new Stack<>();
+
+        visitado[verticeInicial] = true;
+        pilha.push(verticeInicial);
+
+        while (!pilha.isEmpty()) {
+            int verticeAtual = pilha.pop();
+            System.out.println(vertices.get(verticeAtual).getRotulo());
+
+            for (int vizinho : listaAdj.get(verticeAtual)) {
+                if (!visitado[vizinho]) {
+                    visitado[vizinho] = true;
+                    pilha.push(vizinho);
+                }
+            }
+        }
+    }
 
 }
