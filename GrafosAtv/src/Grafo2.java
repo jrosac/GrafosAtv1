@@ -301,30 +301,22 @@ public class Grafo2 {
             return true;
         }
 
-    public boolean buscaEmProfundidade(int verticeInicial, int verticeBuscado) {
-        boolean[] visitado = new boolean[numVertices];
-        Stack<Integer> pilha = new Stack<>();
+    public void dfs(int start) {
+        boolean[] isVisited = new boolean[numVertices];
+        dfsRecursive(start, isVisited);
+    }
 
-        visitado[verticeInicial] = true;
-        pilha.push(verticeInicial);
-
-        while (!pilha.isEmpty()) {
-            int verticeAtual = pilha.pop();
-            System.out.println(vertices.get(verticeAtual).getRotulo());
-
-            if (verticeAtual == verticeBuscado) {
-                return true;
-            }
-
-            for (int vizinho : listaAdj.get(verticeAtual)) {
-                if (!visitado[vizinho]) {
-                    visitado[vizinho] = true;
-                    pilha.push(vizinho);
-                }
-            }
+    private void dfsRecursive(int current, boolean[] isVisited) {
+        isVisited[current] = true;
+        visit(current);
+        for (int dest : listaAdj.get(current)) {
+            if (!isVisited[dest])
+                dfsRecursive(dest, isVisited);
         }
+    }
 
-        return false;
+    private void visit(int vertex) {
+        System.out.println("Visitando vÃ©rtice " + vertex);
     }
 
 }

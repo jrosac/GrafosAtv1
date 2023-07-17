@@ -52,7 +52,7 @@ public class Principal {
         grafo2.adicionarAresta(3,4);
 
 
-        grafo2.imprimirGrafo2();*/
+        grafo2.imprimirGrafo2();
 
         System.out.println("\nExemplo de 2.1");
         Grafo2 grafo3 = new Grafo2(5, false);
@@ -63,14 +63,15 @@ public class Principal {
         }
         else {
             System.out.println("se lascou me nobre, achei foi nada");
-        }
+        }*/
 
-        /*System.out.println("\nExemplo de 2.2");
+        System.out.println("\nExemplo de 2.2");
         Grafo2 grafo4 = new Grafo2(6, false);
         grafo4.gerarGrafoRegular(6,2);
         grafo4.imprimirGrafo2();
+        grafo4.buscaEmProfundidade(0,5);
 
-
+        /*
         System.out.println("\nExemplo de 2.3");
         Grafo2 grafo5 = new Grafo2(5, false);
         grafo5.adicionarVertice(0, "v1");
