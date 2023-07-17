@@ -73,7 +73,7 @@ public class Principal {
         grafo4.adicionarAresta(3,4);
 
         grafo4.imprimirGrafo2();
-        grafo4.buscaEmProfundidade(0);
+        grafo4.buscaEmProfundidade(0,0);
 
         /*
         System.out.println("\nExemplo de 2.3");

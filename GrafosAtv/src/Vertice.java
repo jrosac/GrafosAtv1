@@ -7,7 +7,8 @@ public class Vertice
     private String rotulo;
     private int grau;
     private boolean flag;
-
+    private int profundidadeEntrada;
+    private int profundidadeSaida;
     public Vertice(int indice, String rotulo)
     {
         this.indice = indice;
@@ -48,5 +49,13 @@ public class Vertice
 
     public void decrementarGrau() {
         grau--;
+    }
+
+    public void setProfundidadeEntrada(int profundidadeEntrada) {
+        this.profundidadeEntrada = profundidadeEntrada;
+    }
+
+    public void setProfundidadeSaida(int profundidadeSaida) {
+        this.profundidadeSaida = profundidadeSaida;
     }
 }

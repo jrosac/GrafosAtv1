@@ -10,6 +10,8 @@ public class Grafo2 {
     private List<List<Integer>> listaAdj;
     private List<Vertice> vertices;
     private int numArestas;
+    private List<Aresta> arestas;
+
 
     public Grafo2(int numVertices, boolean matriz) {
         this.numVertices = numVertices;
@@ -27,9 +29,10 @@ public class Grafo2 {
                 listaAdj.add(new ArrayList<>());
             }
         }
-
+        arestas = new ArrayList<>();
         vertices = new ArrayList<>();
     }
+
 
     public void adicionarVertice(int indice, String rotulo) {
         Vertice vertice = new Vertice(indice, rotulo);
@@ -302,17 +305,32 @@ public class Grafo2 {
         }
 
 
-    public void buscaEmProfundidade(int verticeAtual)
+    int contadorEntrada = 1;
+    int contadorSaida = 1;
+
+    public void buscaEmProfundidade(int verticeAtual, int pai)
     {
         vertices.get(verticeAtual).setFlag(true);
+        vertices.get(verticeAtual).setProfundidadeEntrada(contadorEntrada++);
+
+
         System.out.println("Vertice visitado: "+vertices.get(verticeAtual).getIndice());
-        for (int destino : listaAdj.get(verticeAtual))
+        for (int proximosVertice : listaAdj.get(verticeAtual))
         {
-            if (vertices.get(destino).getFlag() == false)
+            if (vertices.get(proximosVertice).getFlag() == false)
             {
-                buscaEmProfundidade(destino);
+                // adicionar aresta da arvore
+                arestas.add(new Aresta(proximosVertice,verticeAtual));
+                buscaEmProfundidade(proximosVertice,verticeAtual);
+            } else{
+                if(proximosVertice != pai)
+                {
+                    arestas.add(new Aresta(proximosVertice,verticeAtual));
+                    //adicionar aresta retorno
+                }
             }
         }
+        vertices.get(verticeAtual).setProfundidadeSaida(contadorSaida++);
     }
 
 
