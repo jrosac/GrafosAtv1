@@ -301,22 +301,19 @@ public class Grafo2 {
             return true;
         }
 
-    public void dfs(int start) {
-        boolean[] isVisited = new boolean[numVertices];
-        dfsRecursive(start, isVisited);
-    }
 
-    private void dfsRecursive(int current, boolean[] isVisited) {
-        isVisited[current] = true;
-        visit(current);
-        for (int dest : listaAdj.get(current)) {
-            if (!isVisited[dest])
-                dfsRecursive(dest, isVisited);
+    public void buscaEmProfundidade(int verticeAtual)
+    {
+        vertices.get(verticeAtual).setFlag(true);
+        System.out.println("Vertice visitado: "+vertices.get(verticeAtual).getIndice());
+        for (int destino : listaAdj.get(verticeAtual))
+        {
+            if (vertices.get(destino).getFlag() == false)
+            {
+                buscaEmProfundidade(destino);
+            }
         }
     }
 
-    private void visit(int vertex) {
-        System.out.println("Visitando vÃ©rtice " + vertex);
-    }
 
 }

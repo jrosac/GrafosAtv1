@@ -67,9 +67,13 @@ public class Principal {
 
         System.out.println("\nExemplo de 2.2");
         Grafo2 grafo4 = new Grafo2(6, false);
+
         grafo4.gerarGrafoRegular(6,2);
+        grafo4.adicionarAresta(1,2);
+        grafo4.adicionarAresta(3,4);
+
         grafo4.imprimirGrafo2();
-        grafo4.buscaEmProfundidade(0,5);
+        grafo4.buscaEmProfundidade(0);
 
         /*
         System.out.println("\nExemplo de 2.3");
