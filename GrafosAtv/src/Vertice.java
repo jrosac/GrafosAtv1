@@ -15,6 +15,8 @@ public class Vertice
         this.rotulo = rotulo;
         this.grau = 0;
         this.flag = false;
+        this.profundidadeEntrada = 1;
+        this.profundidadeSaida = 1;
     }
     public Vertice(int indice)
     {
@@ -22,6 +24,8 @@ public class Vertice
         this.rotulo = "v"+String.valueOf(indice);
         this.grau = 0;
         this.flag = false;
+        this.profundidadeEntrada = 1;
+        this.profundidadeSaida = 1;
     }
 
     public void setFlag(boolean flag) {
@@ -43,6 +47,8 @@ public class Vertice
     {
         return rotulo;
     }
+    public int getProfundidadeEntrada(){return profundidadeEntrada;}
+    public int getProfundidadeSaida(){return profundidadeSaida;}
     public void incrementarGrau() {
         grau++;
     }

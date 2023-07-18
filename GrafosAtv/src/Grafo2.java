@@ -7,7 +7,7 @@ public class Grafo2 {
     private int[][] matrizAdj;
     private List<List<Integer>> listaAdj;
     private List<Vertice> vertices;
-    public List<Aresta> arestas;
+    private List<Aresta> arestas;
     private int numArestas;
 
 
@@ -328,13 +328,13 @@ public class Grafo2 {
             }
         }
         vertices.get(verticeAtual).setProfundidadeSaida(contadorSaida++);
-        //
+
         HashSet<String> arestasUnicas = new HashSet<>();
         List<Aresta> arestasDeRetornoUnicas = new ArrayList<>();
         for (Aresta aresta : arestasDeRetorno)
         {
-            String chave1 = aresta.getVertice1() + "-" + aresta.getVertice2();
-            String chave2 = aresta.getVertice2() + "-" + aresta.getVertice1();
+            String chave1 = aresta.getVertice1()+"-"+aresta.getVertice2();
+            String chave2 = aresta.getVertice2()+"-"+aresta.getVertice1();
 
             if (!arestasUnicas.contains(chave1) && !arestasUnicas.contains(chave2))
             {
@@ -344,5 +344,32 @@ public class Grafo2 {
         }
         arestasDeRetorno = arestasDeRetornoUnicas;
     }
+    public void imprimirArestasDeBusca()
+    {
+        System.out.println("\nArestas de Retorno: ");
+        for (Aresta aresta : arestasDeRetorno)
+        {
+            System.out.println("Aresta "+"v"+String.valueOf(aresta.getVertice1())+" "+"v"+String.valueOf(aresta.getVertice2()));
+        }
 
+        System.out.println("\nArestas da Arvore: ");
+        for (Aresta aresta : arestasDaArvore)
+        {
+            System.out.println("Aresta "+"v"+String.valueOf(aresta.getVertice1())+" "+"v"+String.valueOf(aresta.getVertice2()));
+        }
+    }
+    public void imprimirContadorDeEntrada()
+    {
+        System.out.println("\nContador de Entrada");
+        for (Vertice vertice: vertices)
+        {
+            System.out.println("v"+vertice.getIndice()+": "+vertice.getProfundidadeEntrada());
+        }
+        System.out.println("\nContador de Saida");
+        for (Vertice vertice: vertices)
+        {
+            System.out.println("v"+vertice.getIndice()+": "+vertice.getProfundidadeSaida());
+        }
+
+    }
 }
