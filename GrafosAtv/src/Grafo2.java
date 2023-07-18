@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.Stack;
+import java.util.*;
+
 
 public class Grafo2 {
     private int numVertices;
@@ -312,32 +310,39 @@ public class Grafo2 {
     int contadorSaida = 1;
     List<Aresta> arestasDaArvore = new ArrayList<>();
     List<Aresta> arestasDeRetorno = new ArrayList<>();
-    public void buscaEmProfundidade(int verticeAtual, int pai)
-    {
+
+    public void buscaEmProfundidade(int verticeAtual, int pai) {
         vertices.get(verticeAtual).setFlag(true);
         vertices.get(verticeAtual).setProfundidadeEntrada(contadorEntrada++);
 
-        System.out.println("Vertice visitado: "+vertices.get(verticeAtual).getIndice());
-        for (int proximosVertice : listaAdj.get(verticeAtual))
-        {
-            if (vertices.get(proximosVertice).getFlag() == false)
-            {
-                // adicionar aresta da arvore
-                //arestas.add(new Aresta(proximosVertice,verticeAtual));
-                arestasDaArvore.add(new Aresta(proximosVertice,verticeAtual));
-                buscaEmProfundidade(proximosVertice,verticeAtual);
-
-            } else{
-                if(proximosVertice != pai)
+        System.out.println("Vertice visitado: " + vertices.get(verticeAtual).getIndice());
+        for (int proximosVertice : listaAdj.get(verticeAtual)) {
+            if (vertices.get(proximosVertice).getFlag() == false) {
+                arestasDaArvore.add(new Aresta(proximosVertice, verticeAtual));
+                buscaEmProfundidade(proximosVertice, verticeAtual);
+            } else {
+                if (proximosVertice != pai)
                 {
-                    //arestas.add(new Aresta(proximosVertice,verticeAtual));
-                    arestasDeRetorno.add(new Aresta(proximosVertice,verticeAtual));
-                    //adicionar aresta retorno
+                    arestasDeRetorno.add(new Aresta(proximosVertice, verticeAtual));
                 }
             }
         }
         vertices.get(verticeAtual).setProfundidadeSaida(contadorSaida++);
-    }
+        //
+        HashSet<String> arestasUnicas = new HashSet<>();
+        List<Aresta> arestasDeRetornoUnicas = new ArrayList<>();
+        for (Aresta aresta : arestasDeRetorno)
+        {
+            String chave1 = aresta.getVertice1() + "-" + aresta.getVertice2();
+            String chave2 = aresta.getVertice2() + "-" + aresta.getVertice1();
 
+            if (!arestasUnicas.contains(chave1) && !arestasUnicas.contains(chave2))
+            {
+                arestasUnicas.add(chave1);
+                arestasDeRetornoUnicas.add(aresta);
+            }
+        }
+        arestasDeRetorno = arestasDeRetornoUnicas;
+    }
 
 }
