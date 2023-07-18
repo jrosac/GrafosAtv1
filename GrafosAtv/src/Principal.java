@@ -131,6 +131,15 @@ public class Principal {
         grafo6.adicionarAresta(6, 7);// g - h
 
         grafo6.buscaEmProfundidade(0,0);
-        
+        /*
+        for (Aresta aresta : grafo6.arestasDeRetorno)
+        {
+            System.out.println("Aresta "+"v"+String.valueOf(aresta.getVertice1())+" "+"v"+String.valueOf(aresta.getVertice2()));
+        }*/
+
+        for (Aresta aresta : grafo6.arestasDaArvore)
+        {
+            System.out.println("Aresta "+"v"+String.valueOf(aresta.getVertice1())+" "+"v"+String.valueOf(aresta.getVertice2()));
+        }
     }
 }

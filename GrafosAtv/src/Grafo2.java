@@ -310,7 +310,8 @@ public class Grafo2 {
 
     int contadorEntrada = 1;
     int contadorSaida = 1;
-
+    List<Aresta> arestasDaArvore = new ArrayList<>();
+    List<Aresta> arestasDeRetorno = new ArrayList<>();
     public void buscaEmProfundidade(int verticeAtual, int pai)
     {
         vertices.get(verticeAtual).setFlag(true);
@@ -322,13 +323,15 @@ public class Grafo2 {
             if (vertices.get(proximosVertice).getFlag() == false)
             {
                 // adicionar aresta da arvore
-                arestas.add(new Aresta(proximosVertice,verticeAtual));
+                //arestas.add(new Aresta(proximosVertice,verticeAtual));
+                arestasDaArvore.add(new Aresta(proximosVertice,verticeAtual));
                 buscaEmProfundidade(proximosVertice,verticeAtual);
 
             } else{
                 if(proximosVertice != pai)
                 {
-                    arestas.add(new Aresta(proximosVertice,verticeAtual));
+                    //arestas.add(new Aresta(proximosVertice,verticeAtual));
+                    arestasDeRetorno.add(new Aresta(proximosVertice,verticeAtual));
                     //adicionar aresta retorno
                 }
             }
