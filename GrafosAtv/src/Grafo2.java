@@ -329,6 +329,7 @@ public class Grafo2 {
         }
         vertices.get(verticeAtual).setProfundidadeSaida(contadorSaida++);
 
+        // Removendo as duplicatas das arestas de retorno
         HashSet<String> arestasUnicas = new HashSet<>();
         List<Aresta> arestasDeRetornoUnicas = new ArrayList<>();
         for (Aresta aresta : arestasDeRetorno)
@@ -358,14 +359,14 @@ public class Grafo2 {
             System.out.println("Aresta "+"v"+String.valueOf(aresta.getVertice1())+" "+"v"+String.valueOf(aresta.getVertice2()));
         }
     }
-    public void imprimirContadorDeEntrada()
+    public void imprimirProfundidades()
     {
-        System.out.println("\nContador de Entrada");
+        System.out.println("Profundidade de Entrada");
         for (Vertice vertice: vertices)
         {
             System.out.println("v"+vertice.getIndice()+": "+vertice.getProfundidadeEntrada());
         }
-        System.out.println("\nContador de Saida");
+        System.out.println("\nProfundidade de Saida");
         for (Vertice vertice: vertices)
         {
             System.out.println("v"+vertice.getIndice()+": "+vertice.getProfundidadeSaida());

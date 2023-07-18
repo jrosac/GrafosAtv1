@@ -104,7 +104,10 @@ public class Principal {
         }
         grafo5.imprimirGrafo2();
     */
+        System.out.println("Exemplo do Exercicio 3\n");
+        // Nosso grafo comeca no indice 0
         Grafo2 grafo6 = new Grafo2(8,false);
+
         grafo6.adicionarVertice(0, "a");
         grafo6.adicionarVertice(1, "b");
         grafo6.adicionarVertice(2, "c");
@@ -131,10 +134,16 @@ public class Principal {
 
         grafo6.adicionarAresta(6, 7);// g - h
 
+        grafo6.imprimirGrafo2();
+
+        System.out.println("\nExercicio 3.1: \nBusca em Profundidade");
         grafo6.buscaEmProfundidade(0,0);
 
+        System.out.println("\nExercicio 3.2: ");
         grafo6.imprimirArestasDeBusca();
-        grafo6.imprimirContadorDeEntrada();
+
+        System.out.println("\nExercicio 3.3: ");
+        grafo6.imprimirProfundidades();
 
     }
 }
