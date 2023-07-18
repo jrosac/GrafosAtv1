@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Matriz {
-    private double[][] mat;
+    private int[][] mat;
     private int numerodelinhas;
     private int numerodecolunas;
 
@@ -9,7 +9,7 @@ public class Matriz {
     {
         numerodelinhas = nlinhas;
         numerodecolunas = ncolunas;
-        mat = new double[numerodelinhas][numerodecolunas];
+        mat = new int[numerodelinhas][numerodecolunas];
 
         for(int i = 0; i < numerodelinhas; i++)
         {
@@ -26,17 +26,17 @@ public class Matriz {
         System.out.println();
         System.out.print("Digite o numero de linhas: "); numerodelinhas = teclado.nextInt();
         System.out.print("Digite o numero de colunas: "); numerodecolunas = teclado.nextInt();
-        mat = new double[numerodelinhas][numerodecolunas];
+        mat = new int[numerodelinhas][numerodecolunas];
         for(int i = 0; i < numerodelinhas; i++)
         {
             for(int j = 0; j < numerodecolunas; j++)
             {
                 System.out.print("Item ("+i+","+j+"): ");
-                mat[i][j] = teclado.nextDouble();
+                mat[i][j] = teclado.nextInt();
             }
         }
     }
-    private void adicionarElemento(double elemento, int i, int j)
+    private void adicionarElemento(int elemento, int i, int j)
     {
         mat[i][j] = elemento;
     }

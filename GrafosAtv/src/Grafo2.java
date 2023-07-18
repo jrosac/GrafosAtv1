@@ -9,8 +9,9 @@ public class Grafo2 {
     private int[][] matrizAdj;
     private List<List<Integer>> listaAdj;
     private List<Vertice> vertices;
+    public List<Aresta> arestas;
     private int numArestas;
-    private List<Aresta> arestas;
+
 
 
     public Grafo2(int numVertices, boolean matriz) {
@@ -34,12 +35,14 @@ public class Grafo2 {
     }
 
 
-    public void adicionarVertice(int indice, String rotulo) {
+    public void adicionarVertice(int indice, String rotulo)
+    {
         Vertice vertice = new Vertice(indice, rotulo);
         vertices.add(vertice);
     }
 
-    public void adicionarAresta(int origem, int destino) {
+    public void adicionarAresta(int origem, int destino)
+    {
         if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices)
         {
             throw new IllegalArgumentException("indices de vertices inválidos.");
@@ -313,7 +316,6 @@ public class Grafo2 {
         vertices.get(verticeAtual).setFlag(true);
         vertices.get(verticeAtual).setProfundidadeEntrada(contadorEntrada++);
 
-
         System.out.println("Vertice visitado: "+vertices.get(verticeAtual).getIndice());
         for (int proximosVertice : listaAdj.get(verticeAtual))
         {
@@ -322,6 +324,7 @@ public class Grafo2 {
                 // adicionar aresta da arvore
                 arestas.add(new Aresta(proximosVertice,verticeAtual));
                 buscaEmProfundidade(proximosVertice,verticeAtual);
+
             } else{
                 if(proximosVertice != pai)
                 {

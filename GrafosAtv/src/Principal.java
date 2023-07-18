@@ -63,19 +63,15 @@ public class Principal {
         }
         else {
             System.out.println("se lascou me nobre, achei foi nada");
-        }*/
-
+        }
         System.out.println("\nExemplo de 2.2");
         Grafo2 grafo4 = new Grafo2(6, false);
 
         grafo4.gerarGrafoRegular(6,2);
-        grafo4.adicionarAresta(1,2);
-        grafo4.adicionarAresta(3,4);
 
         grafo4.imprimirGrafo2();
-        grafo4.buscaEmProfundidade(0,0);
 
-        /*
+
         System.out.println("\nExemplo de 2.3");
         Grafo2 grafo5 = new Grafo2(5, false);
         grafo5.adicionarVertice(0, "v1");
@@ -107,6 +103,34 @@ public class Principal {
         }
         grafo5.imprimirGrafo2();
     */
+        Grafo2 grafo6 = new Grafo2(8,false);
+        grafo6.adicionarVertice(0, "a");
+        grafo6.adicionarVertice(1, "b");
+        grafo6.adicionarVertice(2, "c");
+        grafo6.adicionarVertice(3, "d");
+        grafo6.adicionarVertice(4, "e");
+        grafo6.adicionarVertice(5, "f");
+        grafo6.adicionarVertice(6, "g");
+        grafo6.adicionarVertice(7, "h");
 
+        grafo6.adicionarAresta(0, 1);// a - b
+        grafo6.adicionarAresta(0, 2);// a - c
+        grafo6.adicionarAresta(0, 4);// a - e
+        grafo6.adicionarAresta(0, 5);// a - f
+
+        grafo6.adicionarAresta(1, 3);// b - d
+        grafo6.adicionarAresta(1, 4);// b - e
+
+        grafo6.adicionarAresta(2, 5);// c - f
+        grafo6.adicionarAresta(2, 6);// c - g
+        grafo6.adicionarAresta(2, 7);// c - h
+
+        grafo6.adicionarAresta(5, 6);// f - g
+        grafo6.adicionarAresta(5, 7);// f - h
+
+        grafo6.adicionarAresta(6, 7);// g - h
+
+        grafo6.buscaEmProfundidade(0,0);
+        
     }
 }
