@@ -103,7 +103,7 @@ public class Principal {
             System.out.println("E Bipartido!");
         }
         grafo5.imprimirGrafo2();
-    */
+
         System.out.println("Exemplo do Exercicio 3\n");
         // Nosso grafo comeca no indice 0
         Grafo2 grafo6 = new Grafo2(8,false);
@@ -144,6 +144,62 @@ public class Principal {
 
         System.out.println("\nExercicio 3.3: ");
         grafo6.imprimirProfundidades();
+        */
+
+       Grafo2 grafo7 = new Grafo2(5, false);
+        grafo7.adicionarVertice(0, "u");
+        grafo7.adicionarVertice(1, "v");
+        grafo7.adicionarVertice(2, "w");
+        grafo7.adicionarVertice(3, "x");
+        grafo7.adicionarVertice(4, "y");
+
+        grafo7.adicionarAresta(0, 1);// a u - v
+        grafo7.adicionarAresta(1, 2);// b v - w
+        grafo7.adicionarAresta(2, 3);// c w - x
+        grafo7.adicionarAresta(3, 4);// d x - t
+        grafo7.adicionarAresta(4, 0);// e y - u
+        grafo7.adicionarAresta(4, 1);// f y - v
+        grafo7.adicionarAresta(1, 4);// g v - y
+        grafo7.adicionarAresta(4, 2);// h w - y
+        /*
+
+        Set<Integer> vertices = new HashSet<>();
+        vertices.add(0);
+        vertices.add(1);
+        vertices.add(2);*/
+
+        //Set<Aresta> arestas = new HashSet<>();
+        //grafo7.subgrafo(vertices,arestas);
+
+        // Imprime o grafo original
+        System.out.println("Grafo Original:");
+        grafo7.imprimirGrafo2();
+
+        // Criar um conjunto com os vértices do subgrafo
+        Set<Integer> verticesSubgrafo = new HashSet<>();
+        verticesSubgrafo.add(0);
+        verticesSubgrafo.add(1);
+        verticesSubgrafo.add(2);
+        verticesSubgrafo.add(3);
+
+        // Criar um conjunto com as arestas do subgrafo
+        Set<Aresta> arestasSubgrafo = new HashSet<>();
+        arestasSubgrafo.add(new Aresta(0, 1));
+        arestasSubgrafo.add(new Aresta(1, 2));
+        arestasSubgrafo.add(new Aresta(0, 3));
+
+        // Criar o subgrafo a partir do grafo original
+        Grafo2 subgrafo = grafo7.subgrafo(verticesSubgrafo, arestasSubgrafo);
+
+        // Imprime o subgrafo
+        System.out.println("\nSubgrafo:");
+        subgrafo.imprimirGrafo2();
+
+
+
+
+
+
 
     }
 }
