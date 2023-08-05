@@ -145,8 +145,8 @@ public class Principal {
         grafo6.imprimirProfundidades();
         */
 
-
         System.out.println("Exercicio 4.6");
+        System.out.println("a)");
 
         Grafo2 grafo7 = new Grafo2(5, false);
         grafo7.adicionarVertice(0, "u");
@@ -163,27 +163,25 @@ public class Principal {
         grafo7.adicionarAresta(4, 1);// f y - v
         grafo7.adicionarAresta(1, 4);// g v - y
         grafo7.adicionarAresta(4, 2);// h w - y
+
         grafo7.imprimirGrafo2();
 
-
+        /*
         List<Integer> ListaDevertices = new ArrayList<>();
-        ListaDevertices.add(0);
-        ListaDevertices.add(1);
-        ListaDevertices.add(2);
-        ListaDevertices.add(3);
-        ListaDevertices.add(4);
+        ListaDevertices.add(0); // u
+        ListaDevertices.add(1); // v
+        ListaDevertices.add(2); // w
+        ListaDevertices.add(3); // x
 
         List<Aresta> ListaDearestas = new ArrayList<>();
-        ListaDearestas.add(new Aresta(0, 1));
-        ListaDearestas.add(new Aresta(1, 2));
-        ListaDearestas.add(new Aresta(1, 4));
+        ListaDearestas.add(new Aresta(0, 1)); // a u - v
+        ListaDearestas.add(new Aresta(1, 2)); // b v - w
+        ListaDearestas.add(new Aresta(2, 3)); // c w - x
         //ListaDearestas.add(new Aresta(1, 2)); // nao esta no grafo original
         //ListaDearestas.add(new Aresta(0, 3)); // nao esta no grafo original
 
-
         Grafo2 subgrafo7 = grafo7.subgrafo(ListaDevertices, ListaDearestas);
-
-        subgrafo7.imprimirGrafo2();
+        subgrafo7.imprimirGrafo2(); // subgrafo proprio
 
         Grafo2 grafo8 = new Grafo2(4, false);
         grafo8.gerarGrafoCompleto(4);
@@ -196,6 +194,24 @@ public class Principal {
         Grafo2 subgrafo8 = grafo8.subgrafoInduzido(VerticesInduzidos);
 
         subgrafo8.imprimirGrafo2();
+
+
+        List<Integer> X = new ArrayList<>();
+        X.add(0);
+        X.add(1);
+        X.add(2);
+
+        grafo7.subtrairVertices(X);
+        grafo7.imprimirGrafo2();
+        */
+        List<Aresta> ListaDearestas = new ArrayList<>();
+        ListaDearestas.add(new Aresta(0, 1)); // a u - v
+        ListaDearestas.add(new Aresta(1, 2)); // b v - w
+        ListaDearestas.add(new Aresta(2, 3)); // c w - x
+
+        Grafo2 arestaInduzido = grafo7.subgrafoArestaInduzido(ListaDearestas);
+
+        arestaInduzido.imprimirGrafo2();
 
     }
 }
