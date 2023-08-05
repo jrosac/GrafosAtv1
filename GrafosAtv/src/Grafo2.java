@@ -90,7 +90,6 @@ public class Grafo2 {
                 matrizAdj[origem][destino] = 1;
                 matrizAdj[destino][origem] = 1;
             }
-
         } else
         {
             if (origem == destino)
@@ -102,8 +101,6 @@ public class Grafo2 {
                 listaAdj.get(origem).add(destino);
                 listaAdj.get(destino).add(origem);
             }
-
-
         }
         vertices.get(origem).incrementarGrau();
         vertices.get(destino).incrementarGrau();
@@ -115,11 +112,12 @@ public class Grafo2 {
         {
             throw new IllegalArgumentException("indices de vertices inválidos.");
         }
-
-        if (matriz) {
+        if (matriz)
+        {
             matrizAdj[origem][destino] = 0;
             matrizAdj[destino][origem] = 0;
-        } else {
+        } else
+        {
             listaAdj.get(origem).remove(Integer.valueOf(destino));
             listaAdj.get(destino).remove(Integer.valueOf(origem));
         }
@@ -131,11 +129,13 @@ public class Grafo2 {
 
     public int calcularGrau(int indiceVertice)
     {
-        if (indiceVertice < 0 || indiceVertice >= numVertices) {
+        if (indiceVertice < 0 || indiceVertice >= numVertices)
+        {
             throw new IllegalArgumentException("indice de vertice inválido.");
         }
         int grau = 0;
-        if (matriz) {
+        if (matriz)
+        {
             for (int i = 0; i < numVertices; i++)
             {
                 grau += matrizAdj[indiceVertice][i];
@@ -149,10 +149,10 @@ public class Grafo2 {
 
     public boolean saoVizinhos(int indiceVertice1, int indiceVertice2)
     {
-        if (indiceVertice1 < 0 || indiceVertice1 >= numVertices || indiceVertice2 < 0 || indiceVertice2 >= numVertices) {
+        if (indiceVertice1 < 0 || indiceVertice1 >= numVertices || indiceVertice2 < 0 || indiceVertice2 >= numVertices)
+        {
             throw new IllegalArgumentException("indices de vertices inválidos.");
         }
-
         if (matriz)
         {
             return matrizAdj[indiceVertice1][indiceVertice2] == 1;
@@ -163,38 +163,48 @@ public class Grafo2 {
         }
     }
 
-    public void imprimirGrafo2() {
+    public void imprimirGrafo2()
+    {
         System.out.println("Numero de vertices: " + numVertices);
         System.out.println("Numero de arestas: " + numArestas + "\n");
 
-        if (matriz) {
+        if (matriz)
+        {
             System.out.println("Estrutura de dados: \nMatriz de Adjacencia");
 
-            for (int a = 0; a < numVertices; a++) {
-                if (a == 0) {
+            for (int a = 0; a < numVertices; a++)
+            {
+                if (a == 0)
+                {
                     System.out.print("Col ");
                 }
                 System.out.print(vertices.get(a).getRotulo() + " ");
             }
             System.out.println();
-            for (int i = 0; i < numVertices; i++) {
+            for (int i = 0; i < numVertices; i++)
+            {
                 System.out.print(vertices.get(i).getRotulo() + "  ");
-                for (int j = 0; j < numVertices; j++) {
+                for (int j = 0; j < numVertices; j++)
+                {
                     System.out.print(matrizAdj[i][j] + " ");
                 }
                 System.out.println();
             }
             System.out.println("Arestas:");
-            for (int i = 0; i < numVertices; i++) {
-                for (int j = i + 1; j < numVertices; j++) {
-                    if (matrizAdj[i][j] == 1) {
+            for (int i = 0; i < numVertices; i++)
+            {
+                for (int j = i + 1; j < numVertices; j++)
+                {
+                    if (matrizAdj[i][j] == 1)
+                    {
                         System.out.println(vertices.get(i).getRotulo() + " - " + vertices.get(j).getRotulo());
                     }
                 }
             }
             System.out.println();
 
-        } else {
+        } else
+        {
             System.out.println("Estrutura de dados: \nLista de Adjacencia\n");
             System.out.println("Arestas:");
 
@@ -209,8 +219,10 @@ public class Grafo2 {
             }
             for (int i = 0; i < numVertices; i++)
             {
-                for (int j : listaAdj.get(i)) {
-                    if (j >= i) {
+                for (int j : listaAdj.get(i))
+                {
+                    if (j >= i)
+                    {
                         System.out.println(vertices.get(i).getRotulo() + " - " + vertices.get(j).getRotulo());
                     }
                 }
@@ -248,16 +260,18 @@ public class Grafo2 {
     }
     public void gerarGrafoCompleto(int n)
     {
-        if (n <= 0) {
+        if (n <= 0)
+        {
             throw new IllegalArgumentException("O valor de n deve ser maior que 0.");
         }
-
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++)
+        {
             adicionarVertice(i, "v"+String.valueOf(i+1));
         }
-
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = i + 1; j < n; j++)
+            {
                 adicionarAresta(i, j);
             }
         }
@@ -273,14 +287,11 @@ public class Grafo2 {
         {
             adicionarVertice(i, "v"+String.valueOf(i + 1));
         }
-
         List<Integer> verticesDisponiveis = new ArrayList<>();
-
         for (int i = 0; i < n; i++)
         {
             verticesDisponiveis.add(i);
         }
-
         while (!verticesDisponiveis.isEmpty())
         {
             int vertice = verticesDisponiveis.get(0);
@@ -288,7 +299,6 @@ public class Grafo2 {
 
             while (grauAtual < k)
             {
-
                 int verticeAleatorio = verticesDisponiveis.get(1);
 
                 if (vertice != verticeAleatorio && calcularGrau(verticeAleatorio) < k)
@@ -308,12 +318,11 @@ public class Grafo2 {
             {
                 return true;
             }
-
             // Verifica se os conjuntos X e Y são vazios
-            if (X.isEmpty() && Y.isEmpty()) {
+            if (X.isEmpty() && Y.isEmpty())
+            {
                 return false;
             }
-
             // Verifica se todos os vertices pertencem a X ou Y
             for (int i = 0; i < grafo.numVertices; i++)
             {
@@ -322,7 +331,6 @@ public class Grafo2 {
                     return false;
                 }
             }
-
             // Verifica se não há arestas entre vertices de X ou entre vertices de Y
             for (int i = 0; i < grafo.numVertices; i++)
             {
@@ -337,10 +345,8 @@ public class Grafo2 {
                     }
                 }
             }
-
             return true;
         }
-
     int contadorEntrada = 1;
     int contadorSaida = 1;
     List<Aresta> arestasDaArvore = new ArrayList<>();
@@ -437,16 +443,16 @@ public class Grafo2 {
             }
         }
         // Create a new subgraph with the specified vertices and edges
-        Grafo2 subgraph = new Grafo2(verticesList.size(), matriz);
+        Grafo2 subgrafo = new Grafo2(verticesList.size(), matriz);
         for (int vertice : verticesList)
         {
-            subgraph.adicionarVertice(vertice);
+            subgrafo.adicionarVertice(vertice);
         }
         for (Aresta aresta : arestasList)
         {
-            subgraph.adicionarAresta(aresta.getVertice1(), aresta.getVertice2());
+            subgrafo.adicionarAresta(aresta.getVertice1(), aresta.getVertice2());
         }
-        return subgraph;
+        return subgrafo;
     }
     public Grafo2 subgrafoInduzido(List<Integer> verticesList)
     {
@@ -494,10 +500,7 @@ public class Grafo2 {
     }
     public Grafo2 subgrafoArestaInduzido(List<Aresta> conjuntoArestas)
     {
-        Grafo2 subgrafo = new Grafo2(numVertices, matriz);
-
         // Adicionar os vértices ao subgrafo
-
         Set<Integer> edges = new HashSet<>();
         for(Aresta aresta: conjuntoArestas)
         {
@@ -505,6 +508,7 @@ public class Grafo2 {
             edges.add(aresta.getVertice2());
             System.out.println(edges);
         }
+        Grafo2 subgrafo = new Grafo2(edges.size(), matriz);
         for (Integer edge : edges)
         {
             subgrafo.adicionarVertice(edge);
