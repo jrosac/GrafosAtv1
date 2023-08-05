@@ -5,8 +5,8 @@ public class Aresta
 
     public Aresta(int vertice1, int vertice2)
     {
-        this.vertice1 = vertice1;
-        this.vertice2 = vertice2;
+        setVertice1(vertice1);
+        setVertice2(vertice2);
     }
 
     public int getVertice1() {

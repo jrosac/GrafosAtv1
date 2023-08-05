@@ -12,7 +12,8 @@ public class Grafo2 {
 
 
 
-    public Grafo2(int numVertices, boolean matriz) {
+    public Grafo2(int numVertices, boolean matriz)
+    {
         this.numVertices = numVertices;
         this.matriz = matriz;
         this.numArestas = 0;
@@ -20,7 +21,8 @@ public class Grafo2 {
         if (matriz)
         {
             matrizAdj = new int[numVertices][numVertices];
-        } else
+        }
+        else
         {
             listaAdj = new ArrayList<>();
             for (int i = 0; i < numVertices; i++)
@@ -38,6 +40,12 @@ public class Grafo2 {
         Vertice vertice = new Vertice(indice, rotulo);
         vertices.add(vertice);
     }
+    public void adicionarVertice(int indice)
+    {
+        Vertice vertice = new Vertice(indice, "v"+String.valueOf(indice));
+        vertices.add(vertice);
+    }
+
 
     public void adicionarAresta(int origem, int destino)
     {
@@ -111,11 +119,10 @@ public class Grafo2 {
         {
             return vertices.get(indiceVertice).getGrau();
         }
-
-
     }
 
-    public boolean saoVizinhos(int indiceVertice1, int indiceVertice2) {
+    public boolean saoVizinhos(int indiceVertice1, int indiceVertice2)
+    {
         if (indiceVertice1 < 0 || indiceVertice1 >= numVertices || indiceVertice2 < 0 || indiceVertice2 >= numVertices) {
             throw new IllegalArgumentException("indices de vertices inválidos.");
         }
@@ -282,8 +289,10 @@ public class Grafo2 {
             }
 
             // Verifica se todos os vertices pertencem a X ou Y
-            for (int i = 0; i < grafo.numVertices; i++) {
-                if (!X.contains(i) && !Y.contains(i)) {
+            for (int i = 0; i < grafo.numVertices; i++)
+            {
+                if (!X.contains(i) && !Y.contains(i))
+                {
                     return false;
                 }
             }
@@ -373,4 +382,40 @@ public class Grafo2 {
         }
 
     }
+    public Grafo2 subgrafo(List<Integer> verticesList, List<Aresta> arestasList)
+    {
+        // Checa se todos os vertices existem no grafo original
+        for (int vertice : verticesList)
+        {
+            if (vertice < 0 || vertice >= numVertices || !(vertices.get(vertice).getIndice() == vertice))
+            {
+                throw new IllegalArgumentException("Indice de vertice do subgrafo invalido: " + vertice);
+            }
+        }
+        // Testa se todas as arestas do subgrafo existem no grafo original
+        for (Aresta aresta : arestasList)
+        {
+            if (aresta.getVertice1() < 0 || aresta.getVertice1() >= numVertices || aresta.getVertice2() < 0 || aresta.getVertice2() >= numVertices)
+            {
+                throw new IllegalArgumentException("Aresta ou Vertice invalido");
+            }
+            // Check if the edge exists in the original graph
+            if (!saoVizinhos(aresta.getVertice1(), aresta.getVertice2()))
+            {
+                throw new IllegalArgumentException("Aresta nao existe no grafo original: "+aresta.getVertice1()+"-"+aresta.getVertice2());
+            }
+        }
+        // Create a new subgraph with the specified vertices and edges
+        Grafo2 subgraph = new Grafo2(verticesList.size(), matriz);
+        for (int vertice : verticesList)
+        {
+            subgraph.adicionarVertice(vertice);
+        }
+        for (Aresta aresta : arestasList)
+        {
+            subgraph.adicionarAresta(aresta.getVertice1(), aresta.getVertice2());
+        }
+        return subgraph;
+    }
+
 }

@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 public class Principal {
     public static void main(String[] args)
     {
@@ -146,7 +145,7 @@ public class Principal {
         grafo6.imprimirProfundidades();
         */
 
-       Grafo2 grafo7 = new Grafo2(5, false);
+        Grafo2 grafo7 = new Grafo2(5, false);
         grafo7.adicionarVertice(0, "u");
         grafo7.adicionarVertice(1, "v");
         grafo7.adicionarVertice(2, "w");
@@ -161,45 +160,26 @@ public class Principal {
         grafo7.adicionarAresta(4, 1);// f y - v
         grafo7.adicionarAresta(1, 4);// g v - y
         grafo7.adicionarAresta(4, 2);// h w - y
-        /*
-
-        Set<Integer> vertices = new HashSet<>();
-        vertices.add(0);
-        vertices.add(1);
-        vertices.add(2);*/
-
-        //Set<Aresta> arestas = new HashSet<>();
-        //grafo7.subgrafo(vertices,arestas);
-
-        // Imprime o grafo original
-        System.out.println("Grafo Original:");
         grafo7.imprimirGrafo2();
 
-        // Criar um conjunto com os vértices do subgrafo
-        Set<Integer> verticesSubgrafo = new HashSet<>();
-        verticesSubgrafo.add(0);
-        verticesSubgrafo.add(1);
-        verticesSubgrafo.add(2);
-        verticesSubgrafo.add(3);
+        /*
+        List<Integer> ListaDevertices = new ArrayList<>();
+        ListaDevertices.add(0);
+        ListaDevertices.add(1);
+        ListaDevertices.add(2);
+        ListaDevertices.add(3);
+        ListaDevertices.add(4);
 
-        // Criar um conjunto com as arestas do subgrafo
-        Set<Aresta> arestasSubgrafo = new HashSet<>();
-        arestasSubgrafo.add(new Aresta(0, 1));
-        arestasSubgrafo.add(new Aresta(1, 2));
-        arestasSubgrafo.add(new Aresta(0, 3));
+        List<Aresta> ListaDearestas = new ArrayList<>();
+        ListaDearestas.add(new Aresta(0, 1));
+        ListaDearestas.add(new Aresta(1, 2));
+        ListaDearestas.add(new Aresta(1, 4));
+        //ListaDearestas.add(new Aresta(1, 2)); // nao esta no grafo original
+        //ListaDearestas.add(new Aresta(0, 3)); // nao esta no grafo original
 
-        // Criar o subgrafo a partir do grafo original
-        Grafo2 subgrafo = grafo7.subgrafo(verticesSubgrafo, arestasSubgrafo);
+        Grafo2 subgrafo7 = grafo7.subgrafo(ListaDevertices, ListaDearestas);
 
-        // Imprime o subgrafo
-        System.out.println("\nSubgrafo:");
-        subgrafo.imprimirGrafo2();
-
-
-
-
-
-
+        subgrafo7.imprimirGrafo2();*/
 
     }
 }
