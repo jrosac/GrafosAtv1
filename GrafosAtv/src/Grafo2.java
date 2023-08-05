@@ -325,8 +325,10 @@ public class Grafo2 {
         vertices.get(verticeAtual).setProfundidadeEntrada(contadorEntrada++);
 
         System.out.println("Vertice visitado: " + vertices.get(verticeAtual).getIndice());
-        for (int proximosVertice : listaAdj.get(verticeAtual)) {
-            if (vertices.get(proximosVertice).getFlag() == false) {
+        for (int proximosVertice : listaAdj.get(verticeAtual))
+        {
+            if (vertices.get(proximosVertice).getFlag() == false)
+            {
                 arestasDaArvore.add(new Aresta(proximosVertice, verticeAtual));
                 buscaEmProfundidade(proximosVertice, verticeAtual);
             } else {
@@ -414,6 +416,41 @@ public class Grafo2 {
         for (Aresta aresta : arestasList)
         {
             subgraph.adicionarAresta(aresta.getVertice1(), aresta.getVertice2());
+        }
+        return subgraph;
+    }
+    public Grafo2 subgrafoInduzido(List<Integer> verticesList)
+    {
+        // Verifica se todos os vértices do conjunto X existem no grafo original
+        for (int vertice : verticesList)
+        {
+            if (vertice < 0 || vertice >= numVertices || !(vertices.get(vertice).getIndice() == vertice))
+            {
+                throw new IllegalArgumentException("Índice de vértice do subgrafo inválido: " + vertice);
+            }
+        }
+
+        // Cria um novo subgrafo com os vértices do conjunto X
+        Grafo2 subgraph = new Grafo2(verticesList.size(), false);
+        for (int vertice : verticesList)
+        {
+            subgraph.adicionarVertice(vertice, vertices.get(vertice).getRotulo());
+        }
+
+        // Adiciona as arestas do subgrafo que existem no grafo original
+        for (int i = 0; i < verticesList.size(); i++)
+        {
+            int vertice1 = verticesList.get(i);
+
+            for (int j = i + 1; j < verticesList.size(); j++)
+            {
+                int vertice2 = verticesList.get(j);
+
+                if (saoVizinhos(vertice1, vertice2))
+                {
+                    subgraph.adicionarAresta(vertice1, vertice2);
+                }
+            }
         }
         return subgraph;
     }

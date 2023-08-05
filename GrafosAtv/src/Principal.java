@@ -145,6 +145,9 @@ public class Principal {
         grafo6.imprimirProfundidades();
         */
 
+
+        System.out.println("Exercicio 4.6");
+
         Grafo2 grafo7 = new Grafo2(5, false);
         grafo7.adicionarVertice(0, "u");
         grafo7.adicionarVertice(1, "v");
@@ -162,7 +165,7 @@ public class Principal {
         grafo7.adicionarAresta(4, 2);// h w - y
         grafo7.imprimirGrafo2();
 
-        /*
+
         List<Integer> ListaDevertices = new ArrayList<>();
         ListaDevertices.add(0);
         ListaDevertices.add(1);
@@ -177,9 +180,22 @@ public class Principal {
         //ListaDearestas.add(new Aresta(1, 2)); // nao esta no grafo original
         //ListaDearestas.add(new Aresta(0, 3)); // nao esta no grafo original
 
+
         Grafo2 subgrafo7 = grafo7.subgrafo(ListaDevertices, ListaDearestas);
 
-        subgrafo7.imprimirGrafo2();*/
+        subgrafo7.imprimirGrafo2();
+
+        Grafo2 grafo8 = new Grafo2(4, false);
+        grafo8.gerarGrafoCompleto(4);
+
+        List<Integer> VerticesInduzidos = new ArrayList<>();
+        VerticesInduzidos.add(0);
+        VerticesInduzidos.add(1);
+        VerticesInduzidos.add(2);
+
+        Grafo2 subgrafo8 = grafo8.subgrafoInduzido(VerticesInduzidos);
+
+        subgrafo8.imprimirGrafo2();
 
     }
 }
