@@ -145,73 +145,129 @@ public class Principal {
         grafo6.imprimirProfundidades();
         */
 
-        System.out.println("Exercicio 4.6");
-        System.out.println("a)");
 
         Grafo2 grafo7 = new Grafo2(5, false);
-        grafo7.adicionarVertice(0, "u");
-        grafo7.adicionarVertice(1, "v");
-        grafo7.adicionarVertice(2, "w");
-        grafo7.adicionarVertice(3, "x");
-        grafo7.adicionarVertice(4, "y");
+        grafo7.adicionarVertice(0,"u"); // u
+        grafo7.adicionarVertice(1,"v"); // v
+        grafo7.adicionarVertice(2,"w"); // w
+        grafo7.adicionarVertice(3,"x"); // x
+        grafo7.adicionarVertice(4,"y"); // y
 
-        grafo7.adicionarAresta(0, 1);// a u - v
-        grafo7.adicionarAresta(1, 2);// b v - w
-        grafo7.adicionarAresta(2, 3);// c w - x
-        grafo7.adicionarAresta(3, 4);// d x - t
-        grafo7.adicionarAresta(4, 0);// e y - u
-        grafo7.adicionarAresta(4, 1);// f y - v
-        grafo7.adicionarAresta(1, 4);// g v - y
-        grafo7.adicionarAresta(4, 2);// h w - y
+        grafo7.adicionarAresta(0,1);// a u - v
+        grafo7.adicionarAresta(1,2);// b v - w
+        grafo7.adicionarAresta(2,3);// c w - x
+        grafo7.adicionarAresta(3,4);// d x - y
+        grafo7.adicionarAresta(4,0);// e y - u
+        grafo7.adicionarAresta(1,4);// f v - y
+        grafo7.adicionarAresta(4,1);// g y - v
+        grafo7.adicionarAresta(2,4);// h y - w
 
+        System.out.println("\nExercicio 4.6 \n");
         grafo7.imprimirGrafo2();
 
-        /*
-        List<Integer> ListaDevertices = new ArrayList<>();
-        ListaDevertices.add(0); // u
-        ListaDevertices.add(1); // v
-        ListaDevertices.add(2); // w
-        ListaDevertices.add(3); // x
+
+        List<Integer> VerticesProprios = new ArrayList<>();
+        VerticesProprios.add(0); // u
+        VerticesProprios.add(1); // v
+        VerticesProprios.add(2); // w
+        VerticesProprios.add(3); // x
 
         List<Aresta> ListaDearestas = new ArrayList<>();
         ListaDearestas.add(new Aresta(0, 1)); // a u - v
         ListaDearestas.add(new Aresta(1, 2)); // b v - w
         ListaDearestas.add(new Aresta(2, 3)); // c w - x
-        //ListaDearestas.add(new Aresta(1, 2)); // nao esta no grafo original
-        //ListaDearestas.add(new Aresta(0, 3)); // nao esta no grafo original
 
-        Grafo2 subgrafo7 = grafo7.subgrafo(ListaDevertices, ListaDearestas);
-        subgrafo7.imprimirGrafo2(); // subgrafo proprio
 
-        Grafo2 grafo8 = new Grafo2(4, false);
-        grafo8.gerarGrafoCompleto(4);
+        System.out.println("\na) Gerar um subgrafo proprio\nVertices: u, v, w, x\nArestas: a, b, c\n");
+        Grafo2 subgrafoProprio = grafo7.subgrafo(VerticesProprios, ListaDearestas);
+        subgrafoProprio.imprimirGrafo2(); // subgrafo proprio
 
-        List<Integer> VerticesInduzidos = new ArrayList<>();
-        VerticesInduzidos.add(0);
-        VerticesInduzidos.add(1);
-        VerticesInduzidos.add(2);
 
-        Grafo2 subgrafo8 = grafo8.subgrafoInduzido(VerticesInduzidos);
+        List<Integer> VerticesGeradores = new ArrayList<>();
+        VerticesGeradores.add(0); // u
+        VerticesGeradores.add(1); // v
+        VerticesGeradores.add(2); // w
+        VerticesGeradores.add(3); // x
+        VerticesGeradores.add(4); // y
 
+        System.out.println("\nb) Gerar um subgrafo gerador\nVertices: u, v, w, x, y\nArestas: a, b, c\n");
+        Grafo2 subgrafoGerador = grafo7.subgrafo(VerticesGeradores, ListaDearestas);
+        subgrafoGerador.imprimirGrafo2(); // subgrafo gerador
+
+        System.out.println("\nc) Seja X1 = {u, v, w, x}, gerar o subgrafo induzido G[X1]\n");
+
+        Grafo2 grafo8 = new Grafo2(5, false);
+
+        grafo8.adicionarVertice(0,"u"); // u
+        grafo8.adicionarVertice(1,"v"); // v
+        grafo8.adicionarVertice(2,"w"); // w
+        grafo8.adicionarVertice(3,"x"); // x
+        grafo8.adicionarVertice(4,"y"); // y
+
+        grafo8.adicionarAresta(0,1);// a u - v
+        grafo8.adicionarAresta(1,2);// b v - w
+        grafo8.adicionarAresta(2,3);// c w - x
+        grafo8.adicionarAresta(3,4);// d x - y
+        grafo8.adicionarAresta(4,0);// e y - u
+        grafo8.adicionarAresta(1,4);// f v - y
+        grafo8.adicionarAresta(4,1);// g y - v
+        grafo8.adicionarAresta(2,4);// h y - w
+
+        List<Integer> X1 = new ArrayList<>();
+        X1.add(0); // u
+        X1.add(1); // v
+        X1.add(2); // w
+        X1.add(3); // x
+
+        Grafo2 subgrafo8 = grafo8.subgrafoInduzido(X1);
         subgrafo8.imprimirGrafo2();
 
+        System.out.println("\nSeja X2 = {u,w}, gerar G-X\n");
+        List<Integer> X2 = new ArrayList<>();
+        X2.add(0);
+        X2.add(2);
 
-        List<Integer> X = new ArrayList<>();
-        X.add(0);
-        X.add(1);
-        X.add(2);
+        grafo8.subtrairVertices(X2);
+        grafo8.imprimirGrafo2();
 
-        grafo7.subtrairVertices(X);
-        grafo7.imprimirGrafo2();
-        */
-        List<Aresta> ListaDearestas = new ArrayList<>();
-        ListaDearestas.add(new Aresta(0, 1)); // a u - v
-        ListaDearestas.add(new Aresta(1, 2)); // b v - w
-        ListaDearestas.add(new Aresta(2, 3)); // c w - x
 
-        Grafo2 arestaInduzido = grafo7.subgrafoArestaInduzido(ListaDearestas);
+        Grafo2 grafo9 = new Grafo2(5, false);
+
+        grafo9.adicionarVertice(0,"u"); // u
+        grafo9.adicionarVertice(1,"v"); // v
+        grafo9.adicionarVertice(2,"w"); // w
+        grafo9.adicionarVertice(3,"x"); // x
+        grafo9.adicionarVertice(4,"y"); // y
+
+        grafo9.adicionarAresta(0,1);// a u - v
+        grafo9.adicionarAresta(1,2);// b v - w
+        grafo9.adicionarAresta(2,3);// c w - x
+        grafo9.adicionarAresta(3,4);// d x - y
+        grafo9.adicionarAresta(4,0);// e y - u
+        grafo9.adicionarAresta(1,4);// f v - y
+        grafo9.adicionarAresta(4,1);// g y - v
+        grafo9.adicionarAresta(2,4);// h y - w
+
+        System.out.println("\ne) Seja E1 = {a,c,e,g}, gerar o subgrafo aresta-induzido G[E1]\n");
+
+        List<Aresta> E1 = new ArrayList<>();
+        E1.add(new Aresta(0, 1)); // a u - v
+        E1.add(new Aresta(2, 3)); // c x - w
+        E1.add(new Aresta(0, 4)); // e u - y
+        E1.add(new Aresta(1, 4)); // g y - v
+
+        Grafo2 arestaInduzido = grafo9.subgrafoArestaInduzido(E1);
 
         arestaInduzido.imprimirGrafo2();
+        System.out.println("\nSeja E2 = {a,b,f}, gerar G-E2\n");
+        List<Aresta> E2 = new ArrayList<>();
+        E2.add(new Aresta(0, 1)); // a u - v
+        E2.add(new Aresta(1, 2)); // b v - w
+        E2.add(new Aresta(1, 4)); // f v - y
+
+        grafo9.subtrairArestas(E2);
+        grafo9.imprimirGrafo2();
+
 
     }
 }

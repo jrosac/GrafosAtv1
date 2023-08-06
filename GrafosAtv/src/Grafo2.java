@@ -77,7 +77,7 @@ public class Grafo2 {
     {
         if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices)
         {
-            throw new IllegalArgumentException("indices de vertices inválidos.");
+            throw new IllegalArgumentException("indices de vertices inválidos."+origem+"-"+destino+"");
         }
         if (matriz)
         {
@@ -110,7 +110,7 @@ public class Grafo2 {
     public void removerAresta(int origem, int destino) {
         if (origem < 0 || origem >= numVertices || destino < 0 || destino >= numVertices)
         {
-            throw new IllegalArgumentException("indices de vertices inválidos.");
+            throw new IllegalArgumentException("indices de vertices inválidos."+origem+"-"+destino);
         }
         if (matriz)
         {
@@ -206,7 +206,6 @@ public class Grafo2 {
         } else
         {
             System.out.println("Estrutura de dados: \nLista de Adjacencia\n");
-            System.out.println("Arestas:");
 
             for (int x = 0; x < numVertices; x++)
             {
@@ -217,6 +216,7 @@ public class Grafo2 {
                 }
                 System.out.println();
             }
+            System.out.println("Arestas:");
             for (int i = 0; i < numVertices; i++)
             {
                 for (int j : listaAdj.get(i))
@@ -446,7 +446,7 @@ public class Grafo2 {
         Grafo2 subgrafo = new Grafo2(verticesList.size(), matriz);
         for (int vertice : verticesList)
         {
-            subgrafo.adicionarVertice(vertice);
+            subgrafo.adicionarVertice(vertice, vertices.get(vertice).getRotulo());
         }
         for (Aresta aresta : arestasList)
         {
@@ -469,7 +469,7 @@ public class Grafo2 {
         Grafo2 subgrafo = new Grafo2(verticesList.size(), false);
         for (int vertice : verticesList)
         {
-            subgrafo.adicionarVertice(vertice);
+            subgrafo.adicionarVertice(vertice,vertices.get(vertice).getRotulo());
         }
 
         // Adiciona as arestas do subgrafo que existem no grafo original
@@ -489,10 +489,10 @@ public class Grafo2 {
         }
         return subgrafo;
     }
-    public void subtrairVertices(List<Integer> RemoverVertices)
+    public void subtrairVertices(List<Integer> removerVertices)
     {
         int i = 0;
-        for(Integer vertice: RemoverVertices)
+        for(Integer vertice: removerVertices)
         {
             removerVertice(vertice-i);
             i++;
@@ -506,12 +506,11 @@ public class Grafo2 {
         {
             edges.add(aresta.getVertice1());
             edges.add(aresta.getVertice2());
-            System.out.println(edges);
         }
         Grafo2 subgrafo = new Grafo2(edges.size(), matriz);
         for (Integer edge : edges)
         {
-            subgrafo.adicionarVertice(edge);
+            subgrafo.adicionarVertice(edge, vertices.get(edge).getRotulo());
         }
 
         // Adicionar as arestas do conjuntoArestas ao subgrafo
@@ -527,6 +526,13 @@ public class Grafo2 {
             }
         }
         return subgrafo;
+    }
+    public void subtrairArestas(List<Aresta> removerArestas)
+    {
+        for(Aresta arestas: removerArestas)
+        {
+            removerAresta(arestas.getVertice1(), arestas.getVertice2());
+        }
     }
 
 }
