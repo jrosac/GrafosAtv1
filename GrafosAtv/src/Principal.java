@@ -143,7 +143,7 @@ public class Principal {
 
         System.out.println("\nExercicio 3.3: ");
         grafo6.imprimirProfundidades();
-        */
+
 
 
         Grafo2 grafo7 = new Grafo2(5, false);
@@ -266,8 +266,24 @@ public class Principal {
         E2.add(new Aresta(1, 4)); // f v - y
 
         grafo9.subtrairArestas(E2);
-        grafo9.imprimirGrafo2();
+        grafo9.imprimirGrafo2();*/
+
+        List<Integer> sequenciaVertices = new ArrayList<>();
+        sequenciaVertices.add(1);
+        sequenciaVertices.add(2);
+        sequenciaVertices.add(3);
+        sequenciaVertices.add(4);
+
+        List<Aresta> sequenciaArestas = new ArrayList<>();
+        sequenciaArestas.add(new Aresta(1, 2, "a"));
+        sequenciaArestas.add(new Aresta(2, 3, "b"));
+        sequenciaArestas.add(new Aresta(3, 4, "c"));
+
+        Passeio passeio = new Passeio(sequenciaVertices, sequenciaArestas);
+        passeio.imprimirPasseio();
 
 
     }
+
+
 }
